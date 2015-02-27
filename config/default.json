@@ -1,4 +1,4 @@
 {
-  "mongo" : ""
-  "idol" : ""
+  "mongo" : " mongodb://azai91:#hackreactor*@ds052827.mongolab.com:52827/geteval",
+  "idol" : "44e7c280-5d7f-462d-bf6d-b898f5044a96",
 }
