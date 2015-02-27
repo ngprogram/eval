@@ -1,5 +1,5 @@
 {
-  "name": "geteval",
+  "name": "eval",
   "version": "0.0.0",
   "authors": [
     "Alex Zai <azai91@gmail.com>"
@@ -9,6 +9,7 @@
     "**/.*",
     "node_modules",
     "bower_components",
+    "client/lib",
     "test",
     "tests"
   ]
