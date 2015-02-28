@@ -8,7 +8,7 @@ var commentSchema = new Schema({
   comment: {type: String, required: true},
   employee_name: {type: String, default: null },
   phone_number: {type: String},
-  date: {type: Date, required: true},
+  date: {type: Date, required: true, default: Date.now()},
   score: {type: Number} // from sentiment anaylsis
 });
 
