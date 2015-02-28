@@ -25,21 +25,36 @@ routeHandler.use(cookieParser('secret'));
 routeHandler.use(cors());
 routeHandler.use(morgan('tiny'));
 
+routeHandler.use('/api/', webhook, webApiRouter);
+// routeHandler.post('/sms/', webhook, webApiRouter.saveComments);
+
+
+routeHandler.use(session({
+  secret: 'secretttt',
+  resave: false,
+  saveUninitialized: true
+}));
+
+routeHandler.use(passport.initialize());
+routeHandler.use(passport.session());
+
 routeHandler.get('/', function(req, res) {
-  webApiRouter.getComments();
   res.sendFile(path.resolve(__dirname + '/../client'));
 });
 
-// routeHandler.use('/api/messages', webApiRouter);
-routeHandler.post('/verify', passport.authenticate('local-signup'));
-routeHandler.post('/login', passport.authenticate('local-login'));
+routeHandler.use('/verify', mailController.verficationOfAccount, passport.authenticate('local-signup', {
+  successRedirect: '/',
+  failureRedirect: '/'
+}));
+routeHandler.post('/login', passport.authenticate('local-login'), function(req, res) {
+  res.send(200, req.user);
+});
 routeHandler.post('/signup', mailController.sendConfirmationEmail);
 routeHandler.post('/forgot', mailController.sendForgotPasswordEmail)
 routeHandler.post('/reset', mailController.verifyResetCode);
 routeHandler.post('/reset-password', mailController.resetPassword);
 
 var webhook = webApiRouter.webhook;
-
 routeHandler.use('/api/', webhook, webApiRouter);
 routeHandler.post('/sms', webhook, webApiRouter.saveComments);
 

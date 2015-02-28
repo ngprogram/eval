@@ -13,13 +13,13 @@ var webhook = twilio.webhook(
 {
   // validate:false,
     // Only validate requests in production
-    validate: process.env.NODE_ENV === 'production'
+    validate: process.env.NODE_ENV === 'production',
 
     // Manually configure the host and protocol used for webhook config - this
     // is the URL our Twilio number will hit in production
     host:'https://geteval.cloudapp.net/populate',
     protocol:'https'
-}); 
+});
 
 webApiRouter.webhook = webhook;
 
@@ -48,7 +48,7 @@ var getComments = function(req,res) {
                   date : msg.dateCreated,
                   phone_number: msg.from,
                   score: sc
-                });              
+                });
                 CommController.saveComment(comm, function(savedC) {
                   console.log('saved',savedC);
                 });
@@ -119,7 +119,7 @@ webApiRouter.saveComments = function(req,res) {
 //               twiml.say(message);
 //             }
 //           }
-//       }); 
+//       });
 //         res.type('text/xml');
 //         res.send(twiml.toString());
 //     }
@@ -135,9 +135,9 @@ webApiRouter.saveComments = function(req,res) {
 //       var commObj = {};
 //         console.log(message.body);
 //         var msg = message.body;
-//         // comm.comment = 
-//         // comm.employee_name = 
-//     }); 
+//         // comm.comment =
+//         // comm.employee_name =
+//     });
 //   }
 // });
 
@@ -145,19 +145,19 @@ webApiRouter.saveComments = function(req,res) {
 // http.createServer(function (req, res) {
 //     // Create a TwiML response
 //     var resp = new twilio.TwimlResponse();
- 
+
 //     // The TwiML response object will have functions on it that correspond
 //     // to TwiML "verbs" and "nouns". This example uses the "Say" verb.
 //     // Passing in a string argument sets the content of the XML tag.
 //     // Passing in an object literal sets attributes on the XML tag.
 //     resp.say({voice:'woman'}, 'ahoy hoy! Testing Twilio and node.js');
- 
+
 //     //Render the TwiML document using "toString"
 //     res.writeHead(200, {
 //         'Content-Type':'text/xml'
 //     });
 //     res.end(resp.toString());
- 
+
 // }).listen(8000);
 
 //Send an SMS text message
