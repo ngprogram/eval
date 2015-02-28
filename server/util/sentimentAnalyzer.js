@@ -10,7 +10,6 @@ function sentimentAnalyzer(comment, callback) {
   spellChecker(comment, function(correctedComment) {
     if (correctedComment) {
       var queryString = generateQuery(correctedComment);
-
       request(_syncUrl + queryString, function(err, response, body) {
         callback(JSON.parse(body).aggregate.score);
       });
