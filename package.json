@@ -5,7 +5,7 @@
   "main": "server.js",
   "scripts": {
     "test": "export NODE_ENV='test'; mocha test/userModelSpec && mocha test/passportSpec.js && mocha test/mailControllerSpec.js",
-    "start": "node server.js",
+    "start": "nodemon server/server.js",
     "start-dev": "export NODE_ENV='test'; node server.js"
   },
   "author": "",
