@@ -26,6 +26,13 @@
     <script src="./app/navbar/navbarController.js"></script>
     <script src="./app/navbar/navbarDirective.js"></script>
 
+    <!-- Load c3.css -->
+    <link href="./lib/c3/c3.css" rel="stylesheet" type="text/css">
+
+    <!-- Load d3.js and c3.js -->
+    <script src="./lib/d3/d3.min.js" charset="utf-8"></script>
+    <script src="./lib/c3/c3.min.js"></script>
+
   </head>
 
   <body>
@@ -39,7 +46,6 @@
       <a href='' ng-click='user.logout()'>Logout</a>
     </div>
 
-    hi
     <div ui-view></div>
 
     <link href="./styles/style.css" rel="stylesheet" type="text/css">
