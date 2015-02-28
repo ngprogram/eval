@@ -1,6 +1,6 @@
 angular
   .module('eval', [
-    // 'eval.dashboard',
+    'eval.dashboard',
     // 'eval.employees',
     'eval.auth',
     // 'eval.navbar',
