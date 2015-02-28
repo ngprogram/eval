@@ -30,7 +30,7 @@ describe('Mail Controller Spec Specs', function() {
     });
   });
 
-  describe('POST signup', function () {
+  describe('Signup', function () {
     it('should send email', function(done) {
       request(app)
         .post('/signup')
@@ -38,36 +38,11 @@ describe('Mail Controller Spec Specs', function() {
         .expect(200, done);
     });
 
-    xit('should return error if attempting to signup with a used email', function(done) {
+    it('should return error if attempting to signup with a used email', function(done) {
       request(app)
         .post('/signup')
         .send({username: 'test', business_name: 'Starbucks', email: 'kirby8u@hotmail.com', password: 'hackreactor'})
-        .expect(500, done);
-    });
-  });
-
-  before(function(done) {
-    agent = request.agent(app);
-    done();
-  })
-
-  xdescribe('POST login', function() {
-    it('should login into a current user successfully', function(done) {
-      agent
-        .post('/login')
-        .send({ username: 'test', password: 'hackreactor'})
-        .expect(200, done);
-    });
-
-
-    it('should return error if attempting to login with incorrect password', function(done) {
-      request(app)
-        .post('/login')
-        .send({ username: 'test', password: 'wrong'})
         .expect(401, done);
     });
-
-
   });
-
 });

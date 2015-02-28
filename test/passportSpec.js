@@ -7,7 +7,7 @@ var expect = require('chai').expect;
 
 var routeHandler = require('../server/routeHandler');
 var config = require('config');
-mongoose.connect(config.get('mongo'));
+// mongoose.connect(config.get('mongo'));
 
 var app = express();
 var User = require('../server/user/userModel');
