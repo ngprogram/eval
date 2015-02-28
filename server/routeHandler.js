@@ -24,11 +24,11 @@ routeHandler.use(cors());
 routeHandler.use(morgan('tiny'));
 
 routeHandler.get('/', function(req, res) {
-  console.log(__dirname);
+  webApiRouter.getComments();
   res.sendFile(path.resolve(__dirname + '/../client'));
 });
 
-routeHandler.use('/api/messages', webApiRouter);
+// routeHandler.use('/api/messages', webApiRouter);
 routeHandler.post('/verify', passport.authenticate('local-signup'));
 routeHandler.post('/login', passport.authenticate('local-login'));
 routeHandler.post('/signup', mailController.sendConfirmationEmail);
@@ -36,5 +36,9 @@ routeHandler.post('/forgot', mailController.sendForgotPasswordEmail)
 routeHandler.post('/reset', mailController.verifyResetCode);
 routeHandler.post('/reset-password', mailController.resetPassword);
 
+var webhook = webApiRouter.webhook;
+
+routeHandler.use('/api/', webhook, webApiRouter);
+// routeHandler.post('/sms/', webhook, webApiRouter.saveComments);
 
 module.exports = routeHandler;

@@ -1,12 +1,105 @@
 var express = require('express');
 var webApiRouter = express.Router();
-var commController = require('../comment/commentController');
+var CommController = require('../comment/commentController');
+var Comment = require('../comment/commentModel');
+var SentAnalyzer = require('../util/sentimentAnalyzer');
 
+var twilio = require('twilio');
 var accountSid = 'ACc0698009482e61db3825a0ee37ce683a';
 var authToken = "1d10ea3ddd05d4edfadc9e23b178026b";
 var client = require('twilio')(accountSid, authToken);
 
+var webhook = twilio.webhook(
+{
+  validate:false
+    // Only validate requests in production
+    // validate: process.env.NODE_ENV === 'production'
 
+    // Manually configure the host and protocol used for webhook config - this
+    // is the URL our Twilio number will hit in production
+    // host:'rev-answering-machine.herokuapp.com',
+    // protocol:'https'
+}); 
+
+webApiRouter.webhook = webhook;
+
+
+webApiRouter.postComment = function(req,res){
+  console.log('asdf');
+    var twiml = new twilio.TwimlResponse();
+    twiml.message('Hello from node.js!');
+    // Render the TwiML response as XML
+    res.send(twiml);
+};
+
+var getComments = function(req,res) {
+  client.sms.messages.get(function(err,data) {
+    if (!err) {
+      data.sms_messages.forEach(function(msg) {
+        var cmt = msg.body;
+        if (cmt.split(' ').length > 3) {
+            if (typeof parseInt(cmt[0],10) === 'number' && typeof cmt[1] === 'string') {
+              var sent = cmt.split(' ').slice(2).join(' ');
+              SentAnalyzer(sent, function(sc) {
+                var comm = new Comment({
+                  companyId: '' + cmt.split(' ')[0],
+                  employee_name: cmt.split(' ')[1],
+                  comment : sent,
+                  date : msg.dateCreated,
+                  phone_number: msg.from,
+                  score: sc
+                });              
+                CommController.saveComment(comm, function(savedC) {
+                  console.log('saved',savedC);
+                });
+              });
+            }
+          }
+      });
+    } else {
+      console.log(err);
+    }
+  });
+};
+
+webApiRouter.get('/comments', getComments);
+// webApiRouter.post('/twilioComm', webApiRouter.postComment);
+module.exports = webApiRouter;
+
+
+
+
+
+//saves comment to database
+// webApiRouter.saveComments = function(request,res) {
+//   var cmt = new Comment({
+//         sid: request.param('MessageSid'),
+//         type:'text',
+//         textMessage:request.param('Body'),
+//         fromCity:request.param('FromCity'),
+//         fromState:request.param('FromState'),
+//         fromCountry:request.param('FromCountry')
+
+//         // companyId: request.param('companyId'),
+//         // comment: request.param('comment'),
+//         // employee_name: {type: String, default: null },
+//         // phone_number: {type: String},
+//         // date: {type: Date, required: true},
+//         // score: {type: Number} // from sentiment anaylsis
+//     });
+
+//     commController.saveComment(cmt, function() {
+//        var twiml = new twilio.TwimlResponse()
+//         .message('Thanks!');
+//         res.send(twiml);
+//     });
+//     // cmt.save(function(err, model) {
+//     //     var twiml = new twilio.TwimlResponse()
+//     //         .message('Thanks for sending Joe a text!  Your message will appear anonymously on leavejoeamessage.com once we confirm the contents are PG rated.');
+//     //     response.send(twiml);
+//     // });
+
+// };
 
 // app.get('/msg', function(req,res) {
 //   var twiml = new twilio.TwimlResponse();
@@ -31,17 +124,6 @@ var client = require('twilio')(accountSid, authToken);
 //     }
 //   });
 // });
-
-
-var getComments = function(req,res) {
-
-
-}
-
-
-
-
-module.exports = webApiRouter;
 
 
 // client.messages.list(function(err, data) {
