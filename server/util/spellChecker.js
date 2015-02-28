@@ -1,27 +1,22 @@
 var config = require('config');
 var request = require('request');
 
-function spellChecker(sentence, callback) {
-
-  if (!sentence) {
-    return;
-  }
+function spellChecker(comment, callback) {
   var options = {
     method: "GET",
-    url: generateQuery(sentence),
+    url: generateQuery(comment),
     headers : {
       "X-Mashape-Key" : config.get('spellcheck'),
       "Accept" : "application/json"
     }
   }
-  request(query, function(err, response, body) {
+  request(options, function(err, response, body) {
     if (err) {
       console.log('error with spellchecker', err);
     }
     if (!JSON.parse(body).suggestion) {
       console.log(JSON.parse(body));
     }
-
     callback(JSON.parse(body).suggestion);
   })
 }
@@ -34,4 +29,4 @@ function generateQuery(sentence) {
   return query + words;
 }
 
-module.exports = spellCheckerController;
+module.exports = spellChecker;
