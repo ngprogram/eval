@@ -21,14 +21,15 @@ function sendConfirmationEmail(req, res, next) {
     var host=req.get('host');
     tempAccount.rand = rand;
     TempUser.create(tempAccount, function(err, createdAccount) {
-        console.log(err);
         if (err) {
+            console.log('error', err);
             res.sendStatus(401);
         }
         if (!err) {
             var link="http://"+req.get('host')+"/verify?id="+rand;
             sendgrid.send(mailCreator.createVerificationEmail(email, link), function(err, json) {
                 if (err) {
+                    console.log('error', err);
                     res.sendStatus(401);
                 } else {
                     res.send(200, rand);
@@ -51,14 +52,14 @@ function verficationOfAccount(req, res, next) {
             // req.body.tempUser = foundTemp;
             // foundTemp.remove();
             // console.log('next');
-            console.log('next');
+            // console.log('next');
             // next();
         }
         else {
             console.log("email is not verified");
             res.redirect('/');
         }
-    })
+    });
 }
 
 function sendForgotPasswordEmail(req, res, next) {

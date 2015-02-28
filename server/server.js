@@ -6,7 +6,7 @@ var webhook = webApiRouter.webhook;
 
 var app = express();
 
-var port = process.env.PORT || 8000;
+var port = process.env.PORT || 80;
 console.log('Server listening on ' + port);
 
 app.use(routeHandler).listen(port);
