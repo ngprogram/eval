@@ -13,6 +13,7 @@ var webApiRouter = require('./textRoutes/webApiRouter');
 var passport = require('./auth/passport');
 var mailController = require('./mail/mailController');
 
+
 routeHandler.use(session({
   secret: 'secretttt',
    resave: false,
@@ -39,6 +40,6 @@ routeHandler.post('/reset-password', mailController.resetPassword);
 var webhook = webApiRouter.webhook;
 
 routeHandler.use('/api/', webhook, webApiRouter);
-// routeHandler.post('/sms/', webhook, webApiRouter.saveComments);
+routeHandler.post('/sms', webhook, webApiRouter.saveComments);
 
 module.exports = routeHandler;
