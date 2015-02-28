@@ -11,13 +11,16 @@ var client = require('twilio')(accountSid, authToken);
 
 app.get('/msg', function(req,res) {
 
+  // if (req.body.getData) {
+
+  // } 
   var twiml = new twilio.TwimlResponse();
   client.messages.list(function(err, data) {
     if (!err) {
       data.messages.forEach(function(message) {
         var commObj = {};
           var msg = message.body;
-          if (msg.split(' ').lengtsh > 3) {
+          if (msg.split(' ').length > 3) {
             if (typeof parseInt(msg[0],10) === 'number' && typeof msg[1] === 'string') {
               commObj.companyId = '' + msg[0];
               commObj.employee_name = msg[1];
