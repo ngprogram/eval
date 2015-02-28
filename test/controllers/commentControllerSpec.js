@@ -1,10 +1,6 @@
-var commentController = require('../server/comment/commentController');
+var commentController = require('../../server/comment/commentController');
 var expect = require('chai').expect;
-var mongoose = require('mongoose');
-var config = require('config');
-var Comment = require('../server/comment/commentModel');
-
-mongoose.connect(config.get('mongo'));
+var Comment = require('../../server/comment/commentModel');
 
 describe('CommentController Spec', function() {
   it('should save a comment', function(done) {

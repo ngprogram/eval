@@ -2,11 +2,11 @@ var request      = require('supertest'),
     express      = require('express'),
     bodyParser   = require('body-parser'),
     mongoose     = require('mongoose'),
-    TempUser = require('../server/user/tempUserModel'),
-    mailController = require('../server/mail/mailController');
+    TempUser = require('../../server/user/tempUserModel'),
+    mailController = require('../../server/mail/mailController');
 
 var config = require('config');
-mongoose.connect(config.get('mongo'));
+// mongoose.connect(config.get('mongo'));
 
 var app = express();
 app.use(bodyParser.json());
