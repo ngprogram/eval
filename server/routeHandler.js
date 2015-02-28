@@ -25,11 +25,12 @@ routeHandler.use(cors());
 routeHandler.use(morgan('tiny'));
 
 routeHandler.get('/', function(req, res) {
-  webApiRouter.getComments();
-  res.sendFile(path.resolve(__dirname + '/../client'));
+  res.sendFile(path.resolve(__dirname + '../../client'));
+  console.log('adsf', __dirname + '../../client');
+
+  // res.sendFile(path.resolve(__dirname + '/../client'));
 });
 
-// routeHandler.use('/api/messages', webApiRouter);
 routeHandler.post('/verify', passport.authenticate('local-signup'));
 routeHandler.post('/login', passport.authenticate('local-login'));
 routeHandler.post('/signup', mailController.sendConfirmationEmail);

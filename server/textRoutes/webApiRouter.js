@@ -13,7 +13,7 @@ var webhook = twilio.webhook(
 {
   // validate:false,
     // Only validate requests in production
-    validate: process.env.NODE_ENV === 'production'
+    validate: process.env.NODE_ENV === 'production',
 
     // Manually configure the host and protocol used for webhook config - this
     // is the URL our Twilio number will hit in production
