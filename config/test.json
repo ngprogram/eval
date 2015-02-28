@@ -1,5 +1,5 @@
 {
-  "mongo" : "mongodb://azai91:#hackreactor*@ds052827.mongolab.com:52827/geteval",
+  "mongo" : "mongodb://localhost/eval",
   "idol" : "44e7c280-5d7f-462d-bf6d-b898f5044a96",
   "spellcheck" : "k0eIl2IJakmsh8nLrScjCXpsPqxDp1H2KcajsnA3QiM9HEiZvc"
 }
