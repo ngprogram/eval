@@ -1,12 +1,17 @@
 var express = require('express');
-
 var routeHandler = require('./routeHandler');
-var webApiRouter = require('./textRoutes/webApiRouter');
-var webhook = webApiRouter.webhook;
-
 var app = express();
+var mongoose = require('mongoose');
+var config = require('config');
 
-var port = process.env.PORT || 80;
+mongoose.connect(config.get('mongo'));
+
+var port = process.env.PORT || 8000;
+
+if (process.env.NODE_ENV === 'production' || process.env.NODE_ENV === 'staging') {
+  port = 80;
+}
+
 console.log('Server listening on ' + port);
 
 app.use(routeHandler).listen(port);

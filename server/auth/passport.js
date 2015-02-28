@@ -13,50 +13,6 @@ passport.deserializeUser(function(id, done) {
   });
 });
 
-// passport.use('local-signup', new LocalStrategy({
-//     passReqToCallback : true
-//   },
-//   function(req, username, password, done) {
-//     console.log('signup');
-//     var tempUser = req.body.tempUser
-//     User.create(tempUser, function(err, createdUser) {
-//       if (!err) {
-//         console.log('SUCCESS');
-//         done(null, createdUser);
-//       }
-//       if (err) {
-//         console.log("FAIL", err);
-//         done(err);
-//       }
-//     });
-//   }
-// ));
-
-passport.use('local-signup', new LocalStrategy(function(username, password, done) {
-
-  console.log('reached inside');
-  User.findOne({ username: username}, function(err, user) {
-    if (err) {
-      return done(err);
-    }
-    if (!user) {
-      return done(null, false, { message: 'Unknown user ' + username });
-    }
-    user.comparePassword(password, function(err, isMatch) {
-      if (err) {
-        console.log('error', err);
-        return done(err);
-      }
-      if(isMatch) {
-        return done(null, user);
-      } else {
-        return done(null, false, { message: 'Invalid password' });
-      }
-    });
-  });
-}));
-
-
 passport.use('local-login', new LocalStrategy(function(username, password, done) {
   console.log('loggin in');
   User.findOne({ username: username}, function(err, user) {

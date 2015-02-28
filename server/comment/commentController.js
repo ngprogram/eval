@@ -3,14 +3,21 @@ var Comment = require('./commentModel');
 var commentController = {};
 
 commentController.saveComment = saveComment;
-commentController.getCommentByCompanyId = getCommentByCompanyId;
+commentController.getComments = getComments;
 
 function saveComment(comment, callback) {
   Comment.create(comment, callback);
 }
 
-function getCommentByCompanyId(companyId, callback) {
-  Comment.find({companyId: companyId}, callback);
+function getComments(req, res) {
+  var companyId = req.user.companyId;
+  Comment.find({companyId: companyId}, function(err, foundComments) {
+    if (err) {
+      console.log('error getting comments', err);
+    } else {
+      res.send(foundComments);
+    }
+  });
 }
 
 module.exports = commentController;
