@@ -19,5 +19,6 @@
   },
   "devDependencies": {
     "chai": "^2.1.0"
+    "flightplan": "^0.6.0"
   }
 }
