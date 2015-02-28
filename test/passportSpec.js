@@ -76,7 +76,7 @@ describe('Local-Passport Specs', function() {
     it('should login into a current user successfully', function(done) {
       agent
         .post('/login')
-        .send({ email: 'kirby8u@hotmail.com', password: 'hackreactor'})
+        .send({ username: 'test', password: 'hackreactor'})
         .expect(200, done);
     });
 
@@ -84,7 +84,7 @@ describe('Local-Passport Specs', function() {
     it('should return error if attempting to login with incorrect password', function(done) {
       request(app)
         .post('/login')
-        .send({ email: 'kirby8u@hotmail.com', password: 'wrong'})
+        .send({ username: 'test', password: 'wrong'})
         .expect(401, done);
     });
 
