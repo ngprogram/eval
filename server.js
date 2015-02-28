@@ -14,6 +14,7 @@ app.get('/msg', function(req,res) {
   // if (req.body.getData) {
 
   // } 
+  
   var twiml = new twilio.TwimlResponse();
   client.messages.list(function(err, data) {
     if (!err) {
