@@ -12,9 +12,11 @@ var cookieParser = require('cookie-parser');
 var webApiRouter = require('./textRoutes/webApiRouter');
 var passport = require('./auth/passport');
 var mailController = require('./mail/mailController');
+var userController = require('./user/userController');
 var mongoose = require('mongoose');
 var MongoStore = require('connect-mongo')(session);
 var config = require('config');
+var commentController = require('./comment/commentController');
 mongoose.connect(config.get('mongo'));
 
 routeHandler.use(cookieParser());
@@ -46,6 +48,9 @@ routeHandler.use(express.static(__dirname + '/../client'));
 routeHandler.post('/login', passport.authenticate('local-login'), function(req, res) {
   res.send(200, req.user);
 });
+
+routeHandler.use('/comments', userController.isLoggedIn, commentController.getComments);
+
 routeHandler.post('/signup', mailController.sendConfirmationEmail);
 routeHandler.use('/verify', mailController.verficationOfAccount);
 routeHandler.post('/forgot', mailController.sendForgotPasswordEmail)

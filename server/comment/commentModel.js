@@ -15,10 +15,7 @@ var commentSchema = new Schema({
 commentSchema.pre('save', function(next) {
   var comment = this;
   comment.score = sentimentAnalyzer(comment.comment, function(err, score) {
-    console.log('score', score);
     comment.score = score;
-    console.log('comment');
-    console.log(comment);
     next();
   })
 });
