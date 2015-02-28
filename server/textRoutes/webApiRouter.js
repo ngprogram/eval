@@ -11,14 +11,14 @@ var client = require('twilio')(accountSid, authToken);
 
 var webhook = twilio.webhook(
 {
-  validate:false
+  // validate:false,
     // Only validate requests in production
-    // validate: process.env.NODE_ENV === 'production'
+    validate: process.env.NODE_ENV === 'production'
 
     // Manually configure the host and protocol used for webhook config - this
     // is the URL our Twilio number will hit in production
-    // host:'rev-answering-machine.herokuapp.com',
-    // protocol:'https'
+    host:'https://geteval.cloudapp.net/populate',
+    protocol:'https'
 }); 
 
 webApiRouter.webhook = webhook;
@@ -71,7 +71,8 @@ module.exports = webApiRouter;
 
 
 //saves comment to database
-// webApiRouter.saveComments = function(request,res) {
+webApiRouter.saveComments = function(req,res) {
+  console.log('adf');
 //   var cmt = new Comment({
 //         sid: request.param('MessageSid'),
 //         type:'text',
@@ -99,7 +100,7 @@ module.exports = webApiRouter;
 //     //     response.send(twiml);
 //     // });
 
-// };
+};
 
 // app.get('/msg', function(req,res) {
 //   var twiml = new twilio.TwimlResponse();
