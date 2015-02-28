@@ -3,10 +3,13 @@ var SALT_WORK_FACTOR = 10;
 var mongoose = require('mongoose');
 var Schema = mongoose.Schema;
 
+//might want more info about business
 var userSchema = Schema({
   username: { type: String, required: true, unique: true },
-  email: { type: String, required: true, unique: true },
+  email: {type: String, required: true, unique: true },
+  business_name: {type: String, required: true},
   password: { type: String, required: true},
+  app_number: {type: Number}
 });
 
 // Password verification
@@ -27,7 +30,12 @@ userSchema.pre('save', function(next) {
 
   var salt = bcrypt.genSaltSync(SALT_WORK_FACTOR);
   user.password = bcrypt.hashSync(user.password, salt);
-  next();
+
+  //TODO: improve counter
+  mongoose.model('User', userSchema).find().count(function(err, count) {
+    user.app_number = count;
+    next();
+  });
 });
 
 // Change when releasing/ clear DB before
