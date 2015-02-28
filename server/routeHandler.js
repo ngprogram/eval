@@ -19,6 +19,7 @@ routeHandler.use(session({
    resave: false,
    saveUninitialized: true
    }));
+
 routeHandler.use(bodyParser.json());
 routeHandler.use(cookieParser('secret'));
 routeHandler.use(cors());
