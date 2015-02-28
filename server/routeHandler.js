@@ -12,21 +12,25 @@ var cookieParser = require('cookie-parser');
 var webApiRouter = require('./textRoutes/webApiRouter');
 var passport = require('./auth/passport');
 var mailController = require('./mail/mailController');
+var mongoose = require('mongoose');
+var MongoStore = require('connect-mongo')(session);
+var config = require('config');
+mongoose.connect(config.get('mongo'));
 
-
-routeHandler.use(session({
-  secret: 'secretttt',
-   resave: false,
-   saveUninitialized: true
-   }));
-
+routeHandler.use(cookieParser());
 routeHandler.use(bodyParser.json());
-routeHandler.use(cookieParser('secret'));
 routeHandler.use(cors());
+
+var sessionStore = new MongoStore({mongooseConnection: mongoose.connection});
+var sessionOpts = {
+  saveUninitialized: true, // saved new sessions
+  resave: false, // do not automatically write to the session store
+  store: sessionStore,
+  secret: 'secret',
+  cookie : { httpOnly: true, maxAge: 2419200000 } // configure when sessions expires
+}
+
 routeHandler.use(morgan('tiny'));
-
-// routeHandler.post('/sms/', webhook, webApiRouter.saveComments);
-
 
 routeHandler.use(session({
   secret: 'secretttt',
@@ -35,25 +39,20 @@ routeHandler.use(session({
 }));
 
 routeHandler.use(passport.initialize());
-routeHandler.use(passport.session());
+routeHandler.use(passport.session(sessionOpts));
 
 routeHandler.use(express.static(__dirname + '/../client'));
 
-routeHandler.use('/verify', mailController.verficationOfAccount, passport.authenticate('local-signup', {
-  successRedirect: '/',
-  failureRedirect: '/'
-}));
 routeHandler.post('/login', passport.authenticate('local-login'), function(req, res) {
   res.send(200, req.user);
 });
 routeHandler.post('/signup', mailController.sendConfirmationEmail);
+routeHandler.use('/verify', mailController.verficationOfAccount);
 routeHandler.post('/forgot', mailController.sendForgotPasswordEmail)
 routeHandler.post('/reset', mailController.verifyResetCode);
 routeHandler.post('/reset-password', mailController.resetPassword);
 
-// var webhook = webApiRouter.webhook;
-// routeHandler.use('/api/', webhook, webApiRouter);
-// routeHandler.use('/api/', webhook, webApiRouter);
-// routeHandler.post('/sms', webhook, webApiRouter.saveComments);
+var webhook = webApiRouter.webhook;
+routeHandler.post('/sms', webhook, webApiRouter.saveComment);
 
 module.exports = routeHandler;

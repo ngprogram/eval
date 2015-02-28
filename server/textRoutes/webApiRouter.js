@@ -7,11 +7,6 @@ var twilio = require('twilio');
 var accountSid = 'ACc0698009482e61db3825a0ee37ce683a';
 var authToken = "1d10ea3ddd05d4edfadc9e23b178026b";
 var client = require('twilio')(accountSid, authToken);
-var mongoose = require('mongoose');
-var config = require('config');
-
-mongoose.connect(config.get('mongo'));
-
 
 var webhook = twilio.webhook(
 {
@@ -21,8 +16,8 @@ var webhook = twilio.webhook(
 
     // Manually configure the host and protocol used for webhook config - this
     // is the URL our Twilio number will hit in production
-    host:'https://geteval.cloudapp.net/populate',
-    protocol:'https'
+    host:'http://geteval.cloudapp.net/sms',
+    protocol:'http'
 });
 
 webApiRouter.webhook = webhook;
@@ -68,7 +63,15 @@ var saveComments = function(callback) {
   });
 };
 
-webApiRouter.get('/comments', saveComments);
+function saveComment(req, res) {
+  console.log('sdf');
+  console.log(req);
+  console.log('res', res);
+}
+
+
+// webApiRouter.get('/comments', saveComment);
+webApiRouter.saveComment = saveComment;
 // webApiRouter.post('/twilioComm', webApiRouter.postComment);
 module.exports = webApiRouter;
 
