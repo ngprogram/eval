@@ -69,7 +69,6 @@ function sendForgotPasswordEmail(req, res, next) {
             res.send(forgotEmailObj);
         }
         if (foundUser) {
-
             var forgotAccount = {
                 rand: rand,
                 email: email
@@ -97,7 +96,7 @@ function verifyResetCode(req, res, next) {
 
     tempUser.findOne({rand: req.body.resetId}, function(err, foundTempUser) {
         if (err) {
-
+            console.log('error verifying reset code');
         }
         if (foundTempUser) {
            resetObj.isValid = true;
@@ -126,7 +125,6 @@ function resetPassword(req, res, next) {
                 if (err) {
                     console.log('error resetting password');
                 }
-
             });
         }
     });
