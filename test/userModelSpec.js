@@ -40,10 +40,10 @@ describe("User Model Spec", function() {
       business_name: "Starbucks"
     }
     User.create(testUser, function(err, createdUser) {
-      expect(createdUser.app_number).to.eql(1);
+      expect(createdUser.companyId).to.eql(1);
 
       User.create(testUser2, function(err, createdUser) {
-        expect(createdUser.app_number).to.eql(2);
+        expect(createdUser.companyId).to.eql(2);
         done();
       });
     });

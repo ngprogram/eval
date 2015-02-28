@@ -6,7 +6,7 @@ var _apiKey = config.get('idol');
 var _syncUrl = 'https://api.idolondemand.com/1/api/sync/analyzesentiment/v1';
 
 function sentimentAnalyzer(comment, callback) {
-
+  comment = removeSpecialWords(comment);
   spellChecker(comment, function(correctedComment) {
     if (correctedComment) {
       var queryString = generateQuery(correctedComment);
@@ -25,6 +25,10 @@ function generateQuery(text) {
   queryString += ('&apikey=' + _apiKey);
 
   return queryString;
+}
+
+function removeSpecialWords(text) {
+  return text.replace(/very/ig, '');
 }
 
 module.exports = sentimentAnalyzer;
