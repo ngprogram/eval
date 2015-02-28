@@ -29,10 +29,15 @@ webApiRouter.webhook = webhook;
 
 webApiRouter.postComment = function(req,res){
   console.log('asdf');
-    var twiml = new twilio.TwimlResponse();
-    twiml.message('Hello from node.js!');
-    // Render the TwiML response as XML
-    res.send(twiml);
+  Comment.create({
+    commentId: 0,
+    comment: 'works',
+    employee_name: "bob"
+  });
+  var twiml = new twilio.TwimlResponse();
+  twiml.message('Hello from node.js!');
+  // Render the TwiML response as XML
+  res.send(twiml);
 };
 
 var saveComments = function(callback) {
@@ -63,7 +68,7 @@ var saveComments = function(callback) {
   });
 };
 
-webApiRouter.get('/comments', getComments);
+webApiRouter.get('/comments', saveComments);
 // webApiRouter.post('/twilioComm', webApiRouter.postComment);
 module.exports = webApiRouter;
 
