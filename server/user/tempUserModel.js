@@ -9,5 +9,8 @@ var tempUserSchema = Schema({
   email: {type: String, required: true, unique: true },
   business_name: {type: String, required: true},
   password: {type: String, required: true},
-  createdAt: {type: Date, expires: 3600} //expires after 3600 seconds
+  createdAt: {type: Date, expires: 3600, default: Date.now()}, //expires after 3600 seconds
+  rand: {type: Number, required: true}
 });
+
+module.exports = mongoose.model('TempUser', tempUserSchema);
