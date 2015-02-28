@@ -28,13 +28,13 @@ plan.target('production', [
 plan.local(function(local) {
   // uncomment these if you need to run a build on your machine first
   // local.log('Run build');
-  local.exec('git add -f bower_components');
+  // local.exec('git add -f bower_components');
 
   local.log('Copy files to remote hosts');
   var filesToCopy = local.exec('git ls-files', {silent: true});
   // rsync files to all the destination's hosts
   local.transfer(filesToCopy, '/tmp/' + tmpDir);
-  local.exec('git rm -rf --cached bower_components');
+  // local.exec('git rm -rf --cached bower_components');
 });
 
 // run commands on remote hosts (destinations)
@@ -48,5 +48,5 @@ plan.remote(function(remote) {
 
   remote.log('Reload application');
   remote.sudo('ln -snf ~/' + tmpDir + ' ~/'+appName, {user: username});
-  remote.exec('sudo restart market');
+  remote.exec('sudo restart eval');
 });

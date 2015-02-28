@@ -21,7 +21,12 @@ describe('Mail Controller Spec Specs', function() {
   before(function(done) {
     TempUser.remove({}, function() {
       console.log('local database cleared');
-      done();
+      TempUser.find({}, function(err, found) {
+        console.log('local');
+        console.log('err', err);
+        console.log(found);
+        done();
+      });
     });
   });
 
