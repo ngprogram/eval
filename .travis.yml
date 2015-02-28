@@ -4,8 +4,6 @@ services:
   - mongodb
 before_install:
   - npm update -g npm
-before_script:
-
 node_js:
   - '0.10'
 branches:
