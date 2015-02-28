@@ -1,9 +1,10 @@
 var mailCreator = require('./mailCreator');
 var User = require('../user/userModel');
-var tempUser = require('../user/tempUserModel');
+var TempUser = require('../user/tempUserModel');
 var config = require('config');
 var sendGridInfo = config.get('mail');
 var sendgrid  = require('sendgrid')(sendGridInfo.api_user, sendGridInfo.api_key);
+var _ = require('lodash');
 
 var mailController = {};
 
@@ -19,14 +20,18 @@ function sendConfirmationEmail(req, res, next) {
     var rand = Math.floor((Math.random() * 1000000000000))
     var host=req.get('host');
     tempAccount.rand = rand;
-    tempUser.create(tempAccount, function(err, createdAccount) {
+    TempUser.create(tempAccount, function(err, createdAccount) {
+        console.log(err);
+        if (err) {
+            res.sendStatus(401);
+        }
         if (!err) {
             var link="http://"+req.get('host')+"/verify?id="+rand;
             sendgrid.send(mailCreator.createVerificationEmail(email, link), function(err, json) {
                 if (err) {
-                    return console.error(err);
+                    res.sendStatus(401);
                 } else {
-                    res.sendStatus(200);
+                    res.send(200, rand);
                 }
             });
         }
@@ -35,18 +40,19 @@ function sendConfirmationEmail(req, res, next) {
 
 
 function verficationOfAccount(req, res, next) {
-    tempUser.findOne({rand: req.query.id}, function(err, foundTemp) {
-        if(!err) {
-            console.log('verified');
-            var verifiedAccount = {
-                username: foundTemp.username,
-                email: foundTemp.email,
-                password: foundTemp.password
-            };
+    TempUser.findOne({rand: req.query.id}, function(err, foundTemp) {
+        if(!err && foundTemp) {
+            User.create(foundTemp, function(err, createdUser) {
+                foundTemp.remove();
+                res.send(200, createdUser);
+            });
 
-            req.body = verifiedAccount;
-            foundTemp.remove();
-            next();
+
+            // req.body.tempUser = foundTemp;
+            // foundTemp.remove();
+            // console.log('next');
+            console.log('next');
+            // next();
         }
         else {
             console.log("email is not verified");
@@ -73,7 +79,7 @@ function sendForgotPasswordEmail(req, res, next) {
                 rand: rand,
                 email: email
             };
-            tempUser.create(forgotAccount, function(err, createdTempAccount) {
+            TempUser.create(forgotAccount, function(err, createdTempAccount) {
                 var username = foundUser.username;
 
                 sendgrid.send(mailCreator.createForgottenPasswordEmail(email, username, link), function(err, json) {
@@ -94,7 +100,7 @@ function verifyResetCode(req, res, next) {
         isValid: false
     };
 
-    tempUser.findOne({rand: req.body.resetId}, function(err, foundTempUser) {
+    TempUser.findOne({rand: req.body.resetId}, function(err, foundTempUser) {
         if (err) {
             console.log('error verifying reset code');
         }
@@ -109,7 +115,7 @@ function verifyResetCode(req, res, next) {
 function resetPassword(req, res, next) {
     var newPassword = req.body.password;
 
-    tempUser.findOne({rand: req.body.resetId}, function(err, foundTempUser) {
+    TempUser.findOne({rand: req.body.resetId}, function(err, foundTempUser) {
         if (!err) {
             User.findOne({email: foundTempUser.email}, function(err, foundUser) {
                 if (!err) {

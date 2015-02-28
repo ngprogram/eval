@@ -11,13 +11,12 @@ function sentimentAnalyzer(comment, callback) {
     if (correctedComment) {
       var queryString = generateQuery(correctedComment);
       request(_syncUrl + queryString, function(err, response, body) {
-        callback(JSON.parse(body).aggregate.score);
+        callback(err, JSON.parse(body).aggregate.score);
       });
     } else {
       console.log('incorrect sentence', incorrectText, correctedComment);
     }
   })
-
 }
 
 function generateQuery(text) {

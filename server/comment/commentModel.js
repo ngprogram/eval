@@ -8,14 +8,17 @@ var commentSchema = new Schema({
   comment: {type: String, required: true},
   employee_name: {type: String, default: null },
   phone_number: {type: String},
-  date: {type: Date, required: true},
+  date: {type: Date, required: true, default: Date.now()},
   score: {type: Number} // from sentiment anaylsis
 });
 
 commentSchema.pre('save', function(next) {
   var comment = this;
   comment.score = sentimentAnalyzer(comment.comment, function(err, score) {
+    console.log('score', score);
     comment.score = score;
+    console.log('comment');
+    console.log(comment);
     next();
   })
 });

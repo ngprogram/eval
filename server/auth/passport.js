@@ -13,13 +13,27 @@ passport.deserializeUser(function(id, done) {
   });
 });
 
-// Use the LocalStrategy within Passport.
-//   Strategies in passport require a `verify` function, which accept
-//   credentials (in this case, a username and password), and invoke a callback
-//   with a user object.  In the real world, this would query a database;
-//   however, in this example we are using a baked-in set of users.
+passport.use('local-signup', new LocalStrategy({
+    passReqToCallback : true
+  },
+  function(req, username, password, done) {
+    console.log('signup');
+    var tempUser = req.body.tempUser
+    User.create(tempUser, function(err, createdUser) {
+      if (!err) {
+        console.log('SUCCESS');
+        done(null, createdUser);
+      }
+      if (err) {
+        console.log("FAIL", err);
+        done(err);
+      }
+    });
+  }
+));
+
 passport.use('local-login', new LocalStrategy(function(username, password, done) {
-  User.findOne({ username: username }, function(err, user) {
+  User.findOne({ username: username}, function(err, user) {
     if (err) {
       return done(err);
     }
@@ -32,31 +46,14 @@ passport.use('local-login', new LocalStrategy(function(username, password, done)
         return done(err);
       }
       if(isMatch) {
-        console.log('match found');
         return done(null, user);
       } else {
-        console.log('no matches were found');
         return done(null, false, { message: 'Invalid password' });
       }
     });
   });
 }));
 
-passport.use('local-signup', new LocalStrategy({
-    passReqToCallback : true
-  },
-  function(req, username, password, done) {
-    var email = req.body.email;
-    var business_name = req.body.business_name;
-    User.create({username: username, password: password, email: email, business_name: business_name}, function(err, createdUser) {
-      if (!err) {
-        done(null, createdUser);
-      }
-      if (err) {
-        done(err);
-      }
-    });
-  }
-));
+
 
 module.exports = passport;
