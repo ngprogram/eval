@@ -1,0 +1,15 @@
+<div>
+  <div>SIGN UP</div>
+    <form>
+      <div><input type="text" placeholder='username' ng-model="username"></div>
+      <div><input type="text" placeholder='businessName' ng-model="businessName"></div>
+      <div><input type="email" placeholder='email' ng-model="email"></div>
+      <div><input type="password" placeholder='password' ng-model="password"></div>
+      <div id="errMessage" ng-show="hasError">{{errorMessage}}</div>
+    </form>
+
+    <div>
+      <a ui-sref="login">LOGIN</a>
+      <div><button ng-click="submitSignup(username, businessName, email, password)">SUBMIT</button></div>
+    </div>
+</div>
