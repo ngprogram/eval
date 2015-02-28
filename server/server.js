@@ -9,12 +9,8 @@ var accountSid = 'ACc0698009482e61db3825a0ee37ce683a';
 var authToken = "1d10ea3ddd05d4edfadc9e23b178026b";
 var client = require('twilio')(accountSid, authToken);
 
+
 app.get('/msg', function(req,res) {
-
-  // if (req.body.getData) {
-
-  // } 
-  
   var twiml = new twilio.TwimlResponse();
   client.messages.list(function(err, data) {
     if (!err) {
@@ -44,7 +40,7 @@ console.log('Server listening on ' + port);
 
 app.listen(port);
 
-
+module.exports = app;
 
 // client.messages.list(function(err, data) {
 //   if (!err) {
