@@ -1,11 +1,10 @@
-var express = require('express');
-var webApiRouter = express.Router();
+var webApiRouter = {};
 var CommController = require('../comment/commentController');
 var Comment = require('../comment/commentModel');
-
+var config = require('config');
 var twilio = require('twilio');
-var accountSid = 'ACc0698009482e61db3825a0ee37ce683a';
-var authToken = "1d10ea3ddd05d4edfadc9e23b178026b";
+var accountSid = config.get('twilio.accountSid');
+var authToken = config.get('twilio.authToken');
 var client = require('twilio')(accountSid, authToken);
 
 var webhook = twilio.webhook(

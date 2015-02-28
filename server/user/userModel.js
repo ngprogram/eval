@@ -6,10 +6,10 @@ var Schema = mongoose.Schema;
 //might want more info about business
 var userSchema = Schema({
   username: { type: String, required: true, unique: true },
-  email: {type: String, required: true, unique: true },
+  email: {type: String, required: true, unique: true},
   business_name: {type: String, required: true},
   password: { type: String, required: true},
-  app_number: {type: Number}
+  companyId: {type: Number, unique: true}
 });
 
 // Password verification
@@ -33,7 +33,7 @@ userSchema.pre('save', function(next) {
 
   //TODO: improve counter
   mongoose.model('User', userSchema).find().count(function(err, count) {
-    user.app_number = count;
+    user.companyId = count;
     next();
   });
 });

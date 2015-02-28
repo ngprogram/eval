@@ -5,5 +5,10 @@
    "mail" : {
     "api_user": "TawnyOwl",
     "api_key": "$hackreactor&1"
+  },
+  "twilio" : {
+    "accountSid" : "ACc0698009482e61db3825a0ee37ce683a",
+    "authToken" : "1d10ea3ddd05d4edfadc9e23b178026b"
+
   }
 }

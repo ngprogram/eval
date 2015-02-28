@@ -3,15 +3,13 @@ var request      = require('supertest'),
     mongoose     = require('mongoose');
 
 var expect = require('chai').expect;
-// var userController = require('../server/user/userController');
 
-var routeHandler = require('../server/routeHandler');
+var routeHandler = require('../../server/routeHandler');
 var config = require('config');
-// mongoose.connect(config.get('mongo'));
 
 var app = express();
-var User = require('../server/user/userModel');
-var TempUser = require('../server/user/tempUserModel');
+var User = require('../../server/user/userModel');
+var TempUser = require('../../server/user/tempUserModel');
 var rand;
 app.use(routeHandler);
 

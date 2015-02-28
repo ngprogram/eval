@@ -1,9 +1,9 @@
-var User = require('../server/user/userModel');
+var User = require('../../server/user/userModel');
 var expect = require('chai').expect;
 var mongoose = require('mongoose');
 var config = require('config');
 
-mongoose.connect(config.get('mongo'));
+// mongoose.connect(config.get('mongo'));
 
 describe("User Model Spec", function() {
 
@@ -40,10 +40,10 @@ describe("User Model Spec", function() {
       business_name: "Starbucks"
     }
     User.create(testUser, function(err, createdUser) {
-      expect(createdUser.app_number).to.eql(1);
+      expect(createdUser.companyId).to.eql(1);
 
       User.create(testUser2, function(err, createdUser) {
-        expect(createdUser.app_number).to.eql(2);
+        expect(createdUser.companyId).to.eql(2);
         done();
       });
     });

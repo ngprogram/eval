@@ -1,9 +1,9 @@
-var TempUser = require('../server/user/tempUserModel');
+var TempUser = require('../../server/user/tempUserModel');
 var expect = require('chai').expect;
 var mongoose = require('mongoose');
 var config = require('config');
 
-mongoose.connect(config.get('mongo'));
+// mongoose.connect(config.get('mongo'));
 
 describe("User Model Spec", function() {
 
