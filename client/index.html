@@ -1,0 +1,48 @@
+<!doctype html>
+<html lang="en" ng-app="eval">
+
+  <head>
+    <meta charset="utf-8">
+    <title>eval</title>
+
+    <script src="http://code.jquery.com/jquery-1.11.2.min.js"></script>
+
+    <script src="./lib/angular/angular.js"></script>
+    <!-- // <script src="./lib/angular-ui-router/release/angular-ui-router.min.js"></script> -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/angular-ui-router/0.2.13/angular-ui-router.js"></script>
+
+    <script src="./app/app.js"></script>
+
+    <script src="./app/auth/authServices.js"></script>
+    <script src="./app/auth/authController.js"></script>
+
+    <script src="./app/dashboard/dashboardServices.js"></script>
+    <script src="./app/dashboard/dashboardController.js"></script>
+
+    <script src="./app/employees/employeesServices.js"></script>
+    <script src="./app/employees/employeesController.js"></script>
+
+    <script src="./app/navbar/navbarServices.js"></script>
+    <script src="./app/navbar/navbarController.js"></script>
+    <script src="./app/navbar/navbarDirective.js"></script>
+
+  </head>
+
+  <body>
+    <div>
+      <span>eval</span>
+
+      <a ui-sref="dashboard">Dashboard</a>
+      <a ui-sref="employees">Employees</a>
+      <a ui-sref="login">login</a>
+      <a ui-sref="signup">signup</a>
+      <a href='' ng-click='user.logout()'>Logout</a>
+    </div>
+
+    hi
+    <div ui-view></div>
+
+    <link href="./styles/style.css" rel="stylesheet" type="text/css">
+  </body>
+
+</html>
