@@ -26,7 +26,7 @@ describe("User Model Spec", function() {
     });
   });
 
-  it('should increment app_number', function(done) {
+  it('should increment companyId', function(done) {
     var testUser = {
       username: "test2",
       email: "test2@gmail.com",
