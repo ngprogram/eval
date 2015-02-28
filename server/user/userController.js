@@ -1,4 +1,5 @@
 var User = require('./userModel');
+var mailController = require('../mail/mailController');
 
 var userController = {};
 userController.checkUsernameExists = checkUsernameExists;
