@@ -14,7 +14,6 @@ function logout(req, res) {
 }
 
 function sendUser(req, res) {
-  console.log('sending', req.user);
   res.send(req.user);
 }
 
