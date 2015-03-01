@@ -100,7 +100,7 @@ table {
 
 /*EMPLOYEES EMPLOYEES EMPLOYEES EMPLOYEES EMPLOYEES EMPLOYEES */
 /*EMPLOYEES TABLE-------------------------------------------------------*/
-.employees-table {
+.employees-table-section {
   margin-top: 50px;
   margin-left: 50px;
   margin-right: 50px;
@@ -156,3 +156,15 @@ h2 {
   font-family: 'Open Sans', sans-serif;
 }
 
+.main-row {
+    cursor: pointer;
+}
+
+.main-row:hover {
+    background-color: #ddd;
+}
+
+.scroll {
+  overflow: scroll;
+  height: 200px;
+}

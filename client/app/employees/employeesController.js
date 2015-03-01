@@ -4,15 +4,23 @@ angular
 
   EmployeesController.$inject = [
     '$scope',
+    'EmployeesFactory',
     'AuthFactory',
   ];
 
-  function EmployeesController ($scope, AuthFactory) {
+  function EmployeesController ($scope, EmployeesFactory, AuthFactory) {
+    $scope.employees = EmployeesFactory.processEmployeesData(sampleData);
+    console.log('EMPLOYEESDATA', $scope.employees);
+
     $scope.averageSentiment = '80';
     $scope.responseCount = '140';
 
     $scope.sentimentChart = null;
     $scope.responsesChart = null;
+
+    $scope.toggleDetail = function($index) {
+      $scope.selectedPosition = ($scope.selectedPosition === $index) ? -1 : $index;
+    }
 
     $scope.showCharts = function() {
 
@@ -87,7 +95,6 @@ angular
           }
         }
       });
-
     }
 
   }

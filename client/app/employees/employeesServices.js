@@ -9,8 +9,17 @@ angular
 
   function EmployeesFactory ($http, AuthFactory) {
     var factory = {};
+    factory.processEmployeesData = processEmployeesData;
     factory.separateDataByEmployee = separateDataByEmployee;
-    console.log(sampleData);
+    factory.processSingleEmployeeData = processSingleEmployeeData;
+
+    function processEmployeesData(data) {
+      var separatedData = separateDataByEmployee(data);
+      for (var name in separatedData) {
+        separatedData[name] = processSingleEmployeeData(separatedData[name]);
+      }
+      return separatedData;
+    }
 
     function separateDataByEmployee(data) {
       var processedData = {};
@@ -26,29 +35,52 @@ angular
 
     function processSingleEmployeeData(dataArray) {
       var processedData = {};
-      var averageSentiment = {
+      processedData.averageSentiment = {};
+      processedData.numberOfComments = {
         week: 0,
         month: 0,
         year: 0
       };
-      var numberOfComments = {
-        week: 0,
-        month: 0,
-        year: 0
-      };
+      processedData.comments = [];
+
+      // [sentiment total, count]
+      var weekSentimentTotal = [0, 0];
+      var monthSentimentTotal = [0, 0];
+      var yearSentimentTotal = [0, 0];
+
       processedData.name = dataArray[0].employee_name;
+
       for (var i = 0; i < dataArray.length; i++) {
+        processedData.comments.push({comment: dataArray[i].comment, score: Math.round(dataArray[i].score * 100)+'%', date: new Date(dataArray[i].date)});
         if (isWithinPastWeek(dataArray[i].date)) {
-          numberOfComments.week++;
-          numberOfComments.month++;
-          numberOfComments.year++;
+          processedData.numberOfComments.week++;
+          processedData.numberOfComments.month++;
+          processedData.numberOfComments.year++;
+          weekSentimentTotal[0] += dataArray[i].score;
+          weekSentimentTotal[1]++;
+          monthSentimentTotal[0] += dataArray[i].score;
+          monthSentimentTotal[1]++;
+          yearSentimentTotal[0] += dataArray[i].score;
+          yearSentimentTotal[1]++;
+        } else if (isWithinPastMonth(dataArray[i].date)) {
+          processedData.numberOfComments.month++;
+          processedData.numberOfComments.year++;
+          monthSentimentTotal[0] += dataArray[i].score;
+          monthSentimentTotal[1]++;
+          yearSentimentTotal[0] += dataArray[i].score;
+          yearSentimentTotal[1]++;
+        } else if (isWithinPastYear(dataArray[i].date)) {
+          processedData.numberOfComments.year++;
+          yearSentimentTotal[0] += dataArray[i].score;
+          yearSentimentTotal[1]++;
         }
-        // } else if (isWithinPastMonth(dataArray[i].date)) {
-
-        // } else if () {
-
-        // }
       }
+      
+      processedData.averageSentiment.week = Math.round(weekSentimentTotal[0]/weekSentimentTotal[1] * 100) + '%';
+      processedData.averageSentiment.month = Math.round(monthSentimentTotal[0]/monthSentimentTotal[1] * 100) + '%';
+      processedData.averageSentiment.year = Math.round(yearSentimentTotal[0]/yearSentimentTotal[1] * 100) + '%';
+
+      console.log('processedData', processedData);
       return processedData;
     }
 
@@ -111,7 +143,7 @@ angular
       var month = now.getMonth();
       // console.log(year);
       var nearestFirstDayOfMonthAtMidnight = new Date(year, month, 1);
-      console.log('nearestFirstDayOfMonthAtMidnight', nearestFirstDayOfMonthAtMidnight);
+      // console.log('nearestFirstDayOfMonthAtMidnight', nearestFirstDayOfMonthAtMidnight);
       //compare if the value is greater than this one above
       if (date > nearestFirstDayOfMonthAtMidnight) {
         inPastMonth = true;
