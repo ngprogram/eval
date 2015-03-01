@@ -11,8 +11,24 @@ angular
 
   function EmployeesController ($scope, EmployeesFactory, AuthFactory, $rootScope) {
     var sampleData = $rootScope.data;
+
+    function sortDataByName(dataArray) {
+      return dataArray.sort(compare);
+    }
+
+    function compare(a, b) {
+      // console.log(a.employee_name);
+      // console.log(b.employee_name);
+      if (a.employee_name.toLowerCase() < b.employee_name.toLowerCase())
+         return -1;
+      if (a.employee_name.toLowerCase() > b.employee_name.toLowerCase())
+        return 1;
+      return 0;
+    }
+
     $scope.employees = EmployeesFactory.processEmployeesData(sampleData);
-    console.log('EMPLOYEESDATA', $scope.employees);
+    console.log('unsorted', $scope.employees);
+    console.log('sorted', sortDataByName($scope.employees));
 
     $scope.averageSentiment = '80';
     $scope.responseCount = '140';
