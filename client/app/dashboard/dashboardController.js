@@ -11,7 +11,7 @@ angular
 
   function DashboardController ($scope, DashboardSentimentFactory, DashboardCommentsFactory, AuthFactory) {
     // console.log('sampleData', sampleData);
-
+    var sampleData = [];
     var sortedData = DashboardSentimentFactory.sortByTime(sampleData);
     // console.log('sortedData', sortedData);
     var dataProcessedTime = DashboardSentimentFactory.changeTimeFormat(sortedData);

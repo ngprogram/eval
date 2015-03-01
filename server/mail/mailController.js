@@ -29,7 +29,6 @@ function sendConfirmationEmail(req, res, next) {
             res.sendStatus(401);
         }
         if (!err) {
-            console.log('created account');
             var link="http://"+req.get('host')+"/verify?id="+rand;
             sendgrid.send(mailCreator.createVerificationEmail(email, link), function(err, json) {
                 if (err) {
@@ -47,17 +46,8 @@ function sendConfirmationEmail(req, res, next) {
 function verficationOfAccount(req, res, next) {
     TempUser.findOne({rand: req.query.id}, function(err, foundTemp) {
         if(!err && foundTemp) {
-            // User.create(foundTemp, function(err, createdUser) {
-            //     foundTemp.remove();
-            //     req.user = createdUser;
-            //     res.redirect('/#/dashboard');
-            // });
-
             req.body = foundTemp;
-            // foundTemp.remove();
-            // console.log('next');
-            // console.log('next');
-            console.log('found');
+            foundTemp.remove();
             next();
         }
         else {
