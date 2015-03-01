@@ -1,13 +1,14 @@
 angular
   .module('eval.dashboard')
   .controller('DashboardController', DashboardController);
-
   DashboardController.$inject = [
     '$scope',
     'DashboardSentimentFactory',
     'DashboardCommentsFactory',
     'AuthFactory'
   ];
+
+  
 
   function DashboardController ($scope, DashboardSentimentFactory, DashboardCommentsFactory, AuthFactory) {
     // console.log('sampleData', sampleData);
@@ -235,5 +236,5 @@ angular
           break;
       }
     }
-
   }
+
