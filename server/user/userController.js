@@ -5,6 +5,18 @@ var userController = {};
 userController.checkUsernameExists = checkUsernameExists;
 userController.checkEmailExists = checkEmailExists;
 userController.isLoggedIn = isLoggedIn;
+userController.sendUser = sendUser;
+userController.logout = logout;
+
+function logout(req, res) {
+  req.logout();
+  res.redirect('/');
+}
+
+function sendUser(req, res) {
+  console.log('sending', req.user);
+  res.send(req.user);
+}
 
 function checkUsernameExists(req, res) {
   var username = req.body.username;
