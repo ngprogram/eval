@@ -26,6 +26,8 @@ footer, header, hgroup, menu, nav, section {
 }
 body {
   line-height: 1;
+  font-family: 'Montserrat';
+
 }
 ol, ul {
   list-style: none;
@@ -117,3 +119,40 @@ td {
 th {
   border: 1px solid;
 }
+
+/**LANDING PAGE**/
+#landingNav {
+  top: 50px;
+  display: block;
+  clear:both;
+  float: left;
+  width: 100%;
+
+}
+
+#logo {
+  display: block;
+  width: 50px;
+  float: left;
+  padding: 10px;
+}
+#landingLinks {
+  float: right;
+  padding: 10px;
+}
+#intro {
+  margin: 0 auto;
+  text-align: center;
+  padding: 150px;
+}
+h1 {
+  font-size: 60px;
+  font-family: 'Open Sans', sans-serif;
+}
+h2 {
+  padding: 30px;
+  font-size: 30px;
+  line-height: 40px;
+  font-family: 'Open Sans', sans-serif;
+}
+
