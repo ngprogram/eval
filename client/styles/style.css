@@ -281,3 +281,39 @@ h2 {
   color: #7B7B7B;
 }
 
+form {
+  padding: 10px;
+}
+/**login and signup*/
+
+#loginHtml, #signupHtml {
+  text-align: center;
+  padding-top: 100px;
+}
+
+.authTitle {
+  color: #28677F;
+  font-size: 30px;
+  margin-bottom: 50px;
+}
+
+input {
+  border: 1px solid #ffffff;
+  padding: 10px;
+  margin-bottom: 10px;
+  border: 1px solid #52A3A1;
+  outline: none;
+  font-size: 15px;
+}
+
+.authBtn {
+  border: none;
+  background: none;
+  outline: none;
+  padding-top: 10px;
+  font-size: 20px;
+  color: #52A3A1;
+}
+.authBtn:hover {
+  color: #28677F;
+}

@@ -1,5 +1,5 @@
 <div id="loginHtml">
-  <div>LOGIN</div>
+  <div class="authTitle">LOGIN</div>
 
   <form ng-submit='submitLogin(email, password)'>
     <div>
@@ -9,7 +9,7 @@
       <input type='password' placeholder='password' ng-model='password'>
     </div>
     <div ng-show='hasError'>{{errorMessage}}</div>
-    <button type="submit">SUBMIT</button>
+    <button class="authBtn" type="submit">SUBMIT</button>
   </form>
   </div>
 </div>
