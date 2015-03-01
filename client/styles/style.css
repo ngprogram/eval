@@ -26,12 +26,17 @@ footer, header, hgroup, menu, nav, section {
 }
 body {
   line-height: 1;
-  font-family: 'Montserrat';
-  background-color: #f9f9f9;
+  font-family: 'Open Sans';
+  background-color: #F5F5F5;
+  width: 100%;
 
 }
 ol, ul {
   list-style: none;
+}
+li {
+  display: inline-block;
+  padding: 0 10px;
 }
 blockquote, q {
   quotes: none;
@@ -50,9 +55,12 @@ table {
   background-color: #444444;
   padding: 15px;
   width: 100%;
+  display: inline-block;
+  margin: 0 auto;
 }
-.eval {
+#eval {
   float: left;
+  width: 100px;
 }
 
 /*DASHBOARD DASHBOARD DASHBOARD DASHBOARD DASHBOARD DASHBOARD */
@@ -78,8 +86,11 @@ table {
   float: right;
 }
 
-.navLinks {
+#navLinks {
+  display: inline-block;
   color: white;
+  float: right;
+  padding-right: 10px;
 }
 .leftSection {
   width: 85%;
@@ -127,12 +138,12 @@ tspan, .c3-axis-y-label {
   font-size: 13px;
   color: #52A3A1;
 }
-.filterBtn:hover  {
+.filterBtn:hover, .activeFilter  {
   color: #28677F;
   border-bottom: 1px solid #28677F;
 }
 a {
-  color: #4E859B;
+  color: #52A3A1;
 }
 a:link, a:visited, a:hover {
  text-decoration: none; 
@@ -140,12 +151,10 @@ a:link, a:visited, a:hover {
 
 a:hover { 
  text-decoration: none;
- color: #55B2CE;
+ color: #6BD0CE;
  text-decoration: underline;
 }
-a:visited {
 
-}
 
 
 #numRes {
@@ -235,21 +244,19 @@ tbody {
   width: 100%;
 
 }
-
-#logo {
-  display: block;
-  width: 50px;
-  float: left;
-  padding: 10px;
+#landingTop {
+  min-height: 10px;
+  background-color: #52A3A1;
+  margin-top: 0;
 }
-#landingLinks {
-  float: right;
-  padding: 10px;
+#evalWord {
+  /*color: #52A3A1;*/
 }
 #intro {
   margin: 0 auto;
   text-align: center;
   padding: 150px;
+  color: #444444;
 }
 h1 {
   font-size: 60px;

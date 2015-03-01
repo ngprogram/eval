@@ -1,7 +1,6 @@
 angular
   .module('eval.dashboard')
   .controller('DashboardController', DashboardController);
-
   DashboardController.$inject = [
     '$scope',
     '$http',
@@ -318,7 +317,9 @@ angular
           break;
       }
     }
+  }
 
+<<<<<<< HEAD
     function getHour() {
       var date = new Date();
       var hour = date.getHours();
@@ -337,3 +338,5 @@ angular
       return month;
     }
   }
+=======
+>>>>>>> (feat) finish landing styling
