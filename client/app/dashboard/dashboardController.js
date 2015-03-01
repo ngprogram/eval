@@ -319,21 +319,20 @@ angular
     }
   }
 
-    function getHour() {
-      var date = new Date();
-      var hour = date.getHours();
-      return hour;
-    }
+  function getHour() {
+    var date = new Date();
+    var hour = date.getHours();
+    return hour;
+  }
 
-    function getDay() {
-      var date = new Date();
-      var day = date.getDay();
-      return day;
-    }
+  function getDay() {
+    var date = new Date();
+    var day = date.getDay();
+    return day;
+  }
 
-    function getMonth() {
-      var date = new Date();
-      var month = date.getMonth();
-      return month;
-    }
+  function getMonth() {
+    var date = new Date();
+    var month = date.getMonth();
+    return month;
   }
