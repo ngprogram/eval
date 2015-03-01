@@ -31,7 +31,7 @@ angular
             ],
             type: 'bar',
             colors: {
-                'data': function(d) { return d.value < 0 ? '#FF0000' : '#0000FF'; }
+                'data': function(d) { return d.value < 0 ? '#D38940' : '#0061AB'; }
             }
           },
           bar: {
@@ -46,10 +46,13 @@ angular
               show: true
             }
           },
+          legend: {
+            show: false
+          },
           axis: {
             x: {
               type: 'category',
-              categories: ['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday'],
+              categories: ['SUN', 'MON', 'TUE', 'WED', 'THU', 'FRI', 'SAT'],
             },
             y: {
               max: 100,
@@ -78,10 +81,13 @@ angular
             show: true
           }
         },
+        legend: {
+          show: false
+        },
         axis: {
           x: {
             type: 'category',
-            categories: ['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday'],
+            categories: ['SUN', 'MON', 'TUE', 'WED', 'THU', 'FRI', 'SAT'],
           },
           y: {
             max: 500,
@@ -125,7 +131,7 @@ angular
             columns: [
               ['data', newData[0], newData[1], newData[2], newData[3], newData[4], newData[5], newData[6]]
             ],
-            categories: ['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday']
+            categories: ['SUN', 'MON', 'TUE', 'WED', 'Thursday', 'Friday', 'Saturday']
           });
           break;
         case 'month':
@@ -168,7 +174,7 @@ angular
           break;
         case 'week':
           $scope.responsesChart.load({
-            categories: ['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday']
+            categories: ['SUN', 'MON', 'TUE', 'WED', 'Thursday', 'Friday', 'Saturday']
           });
           break;
         case 'month':

@@ -27,6 +27,7 @@ footer, header, hgroup, menu, nav, section {
 body {
   line-height: 1;
   font-family: 'Montserrat';
+  background-color: #f9f9f9;
 
 }
 ol, ul {
@@ -45,56 +46,93 @@ table {
   border-spacing: 0;
 }
 
+#headerbar {
+  background-color: gray;
+}
 
 /*DASHBOARD DASHBOARD DASHBOARD DASHBOARD DASHBOARD DASHBOARD */
-/*SENTIMENT CHART-------------------------------------------------------*/
-.sentiment-section {
+
+.chartSection {
   /*width: 500px;*/
-  border: 1px solid black;
+  /*border: 1px solid ##727272;*/
   overflow: hidden; /* will contain if #first is longer than #second */
-  margin-top: 50px;
-  margin-bottom: 50px;
-  margin-left: 50px;
-  margin-right: 50px;
+  margin: 30px;
 }
 
-#sentiment-chart {
-
+.chartNav {
+  padding: 15px;
+}
+.chartName {
+  color: #28677F;
+  font-size: 20px;
+}
+.chartDiv {
+  padding-top: 10px;
+}
+.filterButtons {
+  float: right;
 }
 
-.sentiment-left {
-  width: 80%;
+.leftSection {
+  width: 85%;
   float:left; /* add this */
-  border-right: 1px solid red;
+  border-right: 2px solid #727272;
+  padding: 0 10px 0 0;
 }
 
-.sentiment-right {
+.rightSection {
+  padding: 10px;
   overflow: hidden; /* if you don't want #second to wrap below #first */
+  float: right;
+  text-align: right;
+  
 }
-
-
-
-/*RESPONSES CHART-------------------------------------------------------*/
-.responses-section {
-  /*width: 500px;*/
-  border: 1px solid black;
-  overflow: hidden; /* will contain if #first is longer than #second */
-  margin-left: 50px;
-  margin-right: 50px;
-}
-
-#responses-chart {
-
-}
-
-.responses-left {
-  width: 80%;
-  float:left; /* add this */
-  border-right: 1px solid red;
-}
-
 .responses-right {
   overflow: hidden; /* if you don't want #second to wrap below #first */
+}
+
+
+tspan, .c3-axis-y-label {
+  font-family: 'Open Sans', sans-serif;
+  font-size: 11px;
+  color: #52A3A1;
+}
+
+.avgTotalLabel {
+  padding: 20px 0 40px 0;
+  font-size: 20px;
+  color: #52A3A1;
+}
+.valueLabel {
+  color: #0061AB;
+  font-size: 45px;
+}
+.valueDesc {
+  padding-top: 10px;
+  font-size: 15px;
+  color:#0061AB;
+}
+.filterBtn {
+  border: none;
+  background: none;
+  outline: none;
+  font-size: 13px;
+  color: #52A3A1;
+}
+.filterBtn:hover  {
+  color: #28677F;
+  border-bottom: 1px solid #28677F;
+}
+
+#numRes {
+  border-top: 2px solid #727272;
+  padding-top: 20px;
+}
+/*c3 chart */
+.c3 svg {
+  font-family: 'Open Sans', sans-serif;
+  font-size: 13px;
+  height: 250px;
 }
 
 
