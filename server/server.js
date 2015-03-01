@@ -6,7 +6,7 @@ var config = require('config');
 
 mongoose.connect(config.get('mongo'));
 
-var port = 80;
+var port = 8000;
 
 // if (process.env.NODE_ENV === 'production' || process.env.NODE_ENV === 'staging') {
 //   port = 80;
