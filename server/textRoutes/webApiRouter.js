@@ -33,7 +33,7 @@ function getAllTexts(req,res) {
                 companyId: '' + cmt.split(' ')[0],
                 employee_name: cmt.split(' ')[1],
                 comment : sent,
-                date : Date.now(),
+                date : new Date(),
                 phone_number: msg.from
               });
               console.log(comm);
@@ -69,6 +69,7 @@ function saveComment(req, res) {
             companyId: '' + cmt.split(' ')[0],
             employee_name: empName,
             comment : sent,
+            date: new Date(),
             phone_number: data.From
           });
           console.log(comm);
