@@ -17998,5 +17998,3 @@ var sampleData = [ { phone_number: '+19430275359',
     companyId: 1234,
     employee_name: 'Sydney',
     score: -0.01582843321375549 } ];
-
-module.exports = sampleData;
