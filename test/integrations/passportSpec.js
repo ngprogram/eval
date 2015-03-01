@@ -52,10 +52,9 @@ describe('Local-Passport Specs', function() {
         .post('/verify?id=' +rand)
         .expect(200)
         .end(function(err, res) {
-          expect(res.body.username).to.eql('test');
+          expect(res.header['location']).to.eql('/#/dashboard')
           done();
         })
-        // .expect(200, done);
     });
 
     it('should redirect if verify hash is incorrect', function(done) {

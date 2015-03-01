@@ -3,7 +3,7 @@ var config = require('config');
 
 mongoose.connect(config.get('mongo'));
 
-describe('Code Friends', function () {
+describe('Eval', function () {
 
   require('./integrations');
   require('./models');
