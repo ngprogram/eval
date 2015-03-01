@@ -49,6 +49,10 @@ table {
 #headerbar {
   background-color: #444444;
   padding: 15px;
+  width: 100%;
+}
+.eval {
+  float: left;
 }
 
 /*DASHBOARD DASHBOARD DASHBOARD DASHBOARD DASHBOARD DASHBOARD */
@@ -74,6 +78,9 @@ table {
   float: right;
 }
 
+.navLinks {
+  color: white;
+}
 .leftSection {
   width: 85%;
   float:left; /* add this */
@@ -124,6 +131,22 @@ tspan, .c3-axis-y-label {
   color: #28677F;
   border-bottom: 1px solid #28677F;
 }
+a {
+  color: #4E859B;
+}
+a:link, a:visited, a:hover {
+ text-decoration: none; 
+}
+
+a:hover { 
+ text-decoration: none;
+ color: #55B2CE;
+ text-decoration: underline;
+}
+a:visited {
+
+}
+
 
 #numRes {
   border-top: 2px solid #727272;
