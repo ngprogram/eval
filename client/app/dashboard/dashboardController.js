@@ -319,7 +319,6 @@ angular
     }
   }
 
-<<<<<<< HEAD
     function getHour() {
       var date = new Date();
       var hour = date.getHours();
@@ -338,5 +337,3 @@ angular
       return month;
     }
   }
-=======
->>>>>>> (feat) finish landing styling
