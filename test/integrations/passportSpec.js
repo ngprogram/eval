@@ -55,7 +55,7 @@ describe('Local-Passport Specs', function() {
     });
   });
 
-  xdescribe('Login Spec', function() {
+  describe('Login Spec', function() {
     it('should login into a current user successfully', function(done) {
       request(app)
         .post('/login')

@@ -50,7 +50,8 @@ routeHandler.use(express.static(__dirname + '/../client'));
 routeHandler.post('/login', passport.authenticate('local-login'), function(req, res) {
   res.send(200, req.user);
 });
-routeHandler.use('/comments', userController.isLoggedIn, commentController.getComments);
+// userController.isLoggedIn,{}
+routeHandler.use('/comments', commentController.getComments);
 routeHandler.post('/signup', mailController.sendConfirmationEmail);
 routeHandler.get('/verify', mailController.verficationOfAccount, passport.authenticate('local-signup', {
   successRedirect: '/#/dashboard',
