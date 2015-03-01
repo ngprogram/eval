@@ -47,18 +47,18 @@ function sendConfirmationEmail(req, res, next) {
 function verficationOfAccount(req, res, next) {
     TempUser.findOne({rand: req.query.id}, function(err, foundTemp) {
         if(!err && foundTemp) {
-            User.create(foundTemp, function(err, createdUser) {
-                foundTemp.remove();
-                req.user = createdUser;
-                res.redirect('/#/dashboard');
-            });
+            // User.create(foundTemp, function(err, createdUser) {
+            //     foundTemp.remove();
+            //     req.user = createdUser;
+            //     res.redirect('/#/dashboard');
+            // });
 
 
-            // req.body.tempUser = foundTemp;
+            req.body.tempUser = foundTemp;
             // foundTemp.remove();
             // console.log('next');
             // console.log('next');
-            // next();
+            next();
         }
         else {
             console.log("email is not verified");

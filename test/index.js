@@ -6,7 +6,7 @@ mongoose.connect(config.get('mongo'));
 describe('Eval', function () {
 
   require('./integrations');
-  require('./models');
-  require('./controllers');
+  // require('./models');
+  // require('./controllers');
 
 });

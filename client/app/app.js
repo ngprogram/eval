@@ -12,7 +12,7 @@ angular
   $stateProvider
     .state('home', {
       url: '/',
-      templateUrl: 'app/auth/login.html',
+      templateUrl: 'templates/landingpage.html',
       resolve: {
         loggedIn: checkLoggedIn
       }
@@ -46,7 +46,7 @@ angular
     if (AuthFactory.isLoggedIn()) {
       $state.go('dashboard');
     } else {
-      $state.go('login');
+      $state.go('home');
     }
   }]);
 
@@ -58,15 +58,17 @@ angular
 function checkLoggedIn($q, $timeout, $http, $location, $rootScope) {
 
   var deferred = $q.defer();
-
+  console.log('called');
   $http.get('/loggedin')
     .success(function(user) {
+      console.log('hello');
       console.log(user);
     if (user !== '0') {
       $rootScope.currentUser = user;
       console.log('signedIn');
       $timeout(deferred.resolve, 0);
     } else {
+      console.log('not logged in ');
       $rootScope.currentUser = undefined;
       $timeout(deferred.resolve, 0);
     }

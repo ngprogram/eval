@@ -17,6 +17,10 @@ function AuthController($scope, $location, $http, $state, AuthFactory) {
     }
   };
 
+  $scope.isLoggedIn = function() {
+    return AuthFactory.isLoggedIn();
+  }
+
   $scope.submitSignup = function(username, businessName, email, password) {
     if (username && businessName && email  && password) {
       AuthFactory.signup(username, businessName, email, password, function(errorMessage) {
