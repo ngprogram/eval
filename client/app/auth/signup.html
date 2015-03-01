@@ -12,4 +12,7 @@
       <a ui-sref="login">LOGIN</a>
       <div><button ng-click="submitSignup(username, businessName, email, password)">SUBMIT</button></div>
     </div>
+    <div ng-show="hasEmailBeenSent">
+      <p>A confirmation email has been sent</p>
+    </div>
 </div>

@@ -34,8 +34,8 @@
   },
   "scripts": {
     "test": "export NODE_ENV='test'; ./node_modules/mocha/bin/mocha test/index.js",
-    "start": "./node_modules/nodemon/bin/nodemon server/server.js",
-    "start-dev": "export NODE_ENV='test'; node server.js"
+    "start": "./node_modules/nodemon/bin/nodemon.js server/server.js",
+    "start-dev": "export NODE_ENV='test';node ./server/util/clearDB.js; ./node_modules/nodemon/bin/nodemon.js server/server.js"
   },
   "repository": {
     "type": "git",
