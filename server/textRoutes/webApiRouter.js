@@ -33,7 +33,7 @@ function getAllTexts(req,res) {
                 companyId: '' + cmt.split(' ')[0],
                 employee_name: cmt.split(' ')[1],
                 comment : sent,
-                date : msg.dateCreated,
+                date : Date.now(),
                 phone_number: msg.from
               });
               console.log(comm);

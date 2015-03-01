@@ -26,10 +26,8 @@ angular
     $scope.initialize = function() {
       $http.get('/comments').
         success(function(data, status, headers, config) {
-          console.log(data);
           $scope.data = data;
           $rootScope.data = data;
-          console.log($scope.data);
           // this callback will be called asynchronously
           // when the response is available
           $scope.sortedData = DashboardSentimentFactory.sortByTime($scope.data);
@@ -130,8 +128,8 @@ angular
           }
         });
 
-        $scope.changeSentimentChartView('week');
-        $scope.changeResponsesChartView('week');
+        $scope.changeSentimentChartView('month');
+        $scope.changeResponsesChartView('month');
 
     }
 
