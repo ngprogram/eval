@@ -58,7 +58,5 @@ routeHandler.post('/forgot', mailController.sendForgotPasswordEmail)
 routeHandler.post('/reset', mailController.verifyResetCode);
 routeHandler.post('/reset-password', mailController.resetPassword);
 routeHandler.post('/sms', webhook, webApiRouter.saveComment);
-//for testing
-routeHandler.get('/allTexts', webhook, webApiRouter.getAllTexts); 
 
 module.exports = routeHandler;
