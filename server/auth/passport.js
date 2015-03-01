@@ -13,14 +13,16 @@ passport.deserializeUser(function(id, done) {
   });
 });
 
-passport.use('local-login', new LocalStrategy(function(username, password, done) {
+passport.use('local-login', new LocalStrategy({
+  usernameField: "email",
+}, function(email, password, done) {
   console.log('loggin in');
-  User.findOne({ username: username}, function(err, user) {
+  User.findOne({ email: email}, function(err, user) {
     if (err) {
       return done(err);
     }
     if (!user) {
-      return done(null, false, { message: 'Unknown user ' + username });
+      return done(null, false, { message: 'Unknown user ' + email });
     }
     user.comparePassword(password, function(err, isMatch) {
       if (err) {

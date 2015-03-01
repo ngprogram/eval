@@ -93,7 +93,9 @@ function AuthFactory($http, $state, $rootScope) {
       delete user.username;
       delete user.businessName;
 
-      $state.go('login');
+      // $location.path('/');
+      window.location.href = '/';
+      // $state.go('home');
     }
   };
 
