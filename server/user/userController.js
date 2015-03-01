@@ -46,7 +46,6 @@ function isLoggedIn(req, res, next) {
   if (req.isAuthenticated()) {
     return next();
   }
-  console.log('not logged in');
   // angular redirects
   res.send(200, 0);
 };

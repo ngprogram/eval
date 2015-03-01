@@ -41,10 +41,10 @@ passport.use('local-signup', new LocalStrategy({
     passReqToCallback : true
   },
   function(req, username, password, done) {
-    var tempUser = req.body.tempUser;
+    console.log('signup');
+    var tempUser = req.body;
     User.create(tempUser, function(err, createdUser) {
       if (!err) {
-        console.log('created');
         done(null, createdUser);
       }
     });
