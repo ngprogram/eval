@@ -3,7 +3,7 @@ angular
   .factory('AuthFactory', AuthFactory);
 
 AuthFactory.$inject = ['$http', '$state'];
-function AuthFactory($http, $state) {
+function AuthFactory($http, $state, $rootScope) {
 
   var user = {};
   var factory = {};
@@ -99,7 +99,10 @@ function AuthFactory($http, $state) {
 
   //checks if the user is logged in
   factory.isLoggedIn = function() {
-    //need to implement
+    if ($rootScope) {
+      return $rootScope.currentUser !== undefined;
+    }
+    return false;
   };
 
   //gets the user's email address

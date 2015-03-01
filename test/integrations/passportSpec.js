@@ -8,21 +8,10 @@ var routeHandler = require('../../server/routeHandler');
 var config = require('config');
 
 var app = express();
-var User = require('../../server/user/userModel');
-var TempUser = require('../../server/user/tempUserModel');
 var rand;
 app.use(routeHandler);
 
 describe('Local-Passport Specs', function() {
-
-  before(function(done) {
-    User.remove({}, function() {
-      TempUser.remove({}, function() {
-        console.log('local database cleared');
-        done();
-      })
-    });
-  });
 
   this.timeout(3000);
 
@@ -47,10 +36,9 @@ describe('Local-Passport Specs', function() {
   });
 
   describe('Verify Spec', function() {
-    it('should have success if verify true', function(done) {
+    it('should redirect to dashboard if usr is created successfully', function(done) {
       request(app)
-        .post('/verify?id=' +rand)
-        .expect(200)
+        .get('/verify?id=' + rand)
         .end(function(err, res) {
           expect(res.header['location']).to.eql('/#/dashboard')
           done();
@@ -65,11 +53,9 @@ describe('Local-Passport Specs', function() {
           done();
         })
     });
-
-
   });
 
-  describe('Login Spec', function() {
+  xdescribe('Login Spec', function() {
     it('should login into a current user successfully', function(done) {
       request(app)
         .post('/login')
