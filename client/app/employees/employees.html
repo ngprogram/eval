@@ -6,42 +6,54 @@
         <th rowspan="2">ID</th>
         <th rowspan="2">NAME</th>
         <th colspan="3">AVG SENTIMENT</th>
-        <th colspan="3"># COMMENT</th>
+        <th colspan="3"># of COMMENTS</th>
       </tr>
       <tr>
-        <td>Wk</td>
-        <td>Mo</td>
-        <td>Yr</td>
-        <td>Wk</td>
-        <td>Mo</td>
-        <td>Yr</td>
+        <td class="subhead">Wk</td>
+        <td class="subhead">Mo</td>
+        <td class="subhead">Yr</td>
+        <td class="subhead">Wk</td>
+        <td class="subhead">Mo</td>
+        <td class="subhead">Yr</td>
       </tr>
     </thead>
 
-    <tbody ng-repeat="(name, value) in employees">
-      <tr class="main-row" ng-click="toggleDetail($index)">
-        <td>{{$index + 1}}</td>
-        <td>{{name}}</td>
-        <td>{{value.averageSentiment.week}}</td>
-        <td>{{value.averageSentiment.month}}</td>
-        <td>{{value.averageSentiment.year}}</td>
-        <td>{{value.numberOfComments.week}}</td>
-        <td>{{value.numberOfComments.month}}</td>
-        <td>{{value.numberOfComments.year}}</td>
-      </tr>
-      <tr class="more-details" ng-show="selectedPosition === $index">
-        <td colspan="8">
-          <div class="scroll">
-            <table>
-              <tr ng-repeat="commentObj in value.comments">
-                <td colspan="6">{{commentObj.comment}}</td>
-                <td>{{commentObj.score}}</td>
-                <td>{{commentObj.date}}</td>
+    <tr>
+      <td colspan="8">
+        <div class="scroll-outer">
+          <table>
+            <tbody ng-repeat="(name, value) in employees" ng-class-odd="'odd-rows'">
+              <tr class="main-row" ng-click="toggleDetail($index)">
+                <td>{{$index + 1}}</td>
+                <td>{{name}}</td>
+                <td>{{value.averageSentiment.week}}</td>
+                <td>{{value.averageSentiment.month}}</td>
+                <td>{{value.averageSentiment.year}}</td>
+                <td>{{value.numberOfComments.week}}</td>
+                <td>{{value.numberOfComments.month}}</td>
+                <td>{{value.numberOfComments.year}}</td>
               </tr>
-            </table>
-          </div>
-        </td>
-      </tr>
-    </tbody>
+              <tr class="more-details" ng-show="selectedPosition === $index">
+                <td colspan="8">
+                  <div class="scroll-inner">
+                    <table>
+                      <tr ng-repeat="commentObj in value.comments">
+                        <td colspan="6">"{{commentObj.comment}}"</td>
+                        <td>score: {{commentObj.score}}</td>
+                        <td>
+                          <p>date: {{commentObj.date}}</p>
+                          <p>time: {{commentObj.time}}</p>
+                        </td>
+                      </tr>
+                    </table>
+                  </div>
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </td>
+    </tr>
+
   </table>
 </div>

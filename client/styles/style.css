@@ -114,10 +114,54 @@ table {
 
 td {
   border: 1px solid;
+  text-align: center;
+  vertical-align: middle;
 }
 
 th {
-  border: 1px solid;
+  padding-top: 10px;
+  padding-bottom: 10px;
+  border: 1px solid black;
+  text-align: center;
+  vertical-align: middle;
+  background-color: #4E859B;
+  color: white;
+}
+
+.subhead {
+  background-color: #55B2CE;
+}
+
+tr {
+  height: 26px;
+  text-align: center;
+  vertical-align: middle;
+}
+
+.main-row {
+  cursor: pointer;
+}
+
+.main-row:hover {
+  background-color: #727272;
+}
+
+.odd-rows {
+  background-color: #ddd;
+}
+
+.scroll-outer {
+  overflow: scroll;
+  height: 500px;
+}
+.scroll-inner {
+  overflow: scroll;
+  height: 200px;
+}
+
+tbody {
+  overflow: scroll;
+  height: 100px;
 }
 
 /**LANDING PAGE**/
@@ -156,15 +200,3 @@ h2 {
   font-family: 'Open Sans', sans-serif;
 }
 
-.main-row {
-    cursor: pointer;
-}
-
-.main-row:hover {
-    background-color: #ddd;
-}
-
-.scroll {
-  overflow: scroll;
-  height: 200px;
-}

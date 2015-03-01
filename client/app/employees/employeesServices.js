@@ -51,7 +51,13 @@ angular
       processedData.name = dataArray[0].employee_name;
 
       for (var i = 0; i < dataArray.length; i++) {
-        processedData.comments.push({comment: dataArray[i].comment, score: Math.round(dataArray[i].score * 100)+'%', date: new Date(dataArray[i].date)});
+        processedData.comments.push({
+          comment: dataArray[i].comment, 
+          score: Math.round(dataArray[i].score * 100)+'%', 
+          date: (new Date(dataArray[i].date)).toLocaleDateString(), 
+          time: (new Date(dataArray[i].date)).toLocaleTimeString()
+        });
+
         if (isWithinPastWeek(dataArray[i].date)) {
           processedData.numberOfComments.week++;
           processedData.numberOfComments.month++;
@@ -76,9 +82,9 @@ angular
         }
       }
       
-      processedData.averageSentiment.week = Math.round(weekSentimentTotal[0]/weekSentimentTotal[1] * 100) + '%';
-      processedData.averageSentiment.month = Math.round(monthSentimentTotal[0]/monthSentimentTotal[1] * 100) + '%';
-      processedData.averageSentiment.year = Math.round(yearSentimentTotal[0]/yearSentimentTotal[1] * 100) + '%';
+      processedData.averageSentiment.week = ( Math.round(weekSentimentTotal[0]/weekSentimentTotal[1] * 100) || 0 ) + '%';
+      processedData.averageSentiment.month = ( Math.round(monthSentimentTotal[0]/monthSentimentTotal[1] * 100) || 0 ) + '%';
+      processedData.averageSentiment.year = ( Math.round(yearSentimentTotal[0]/yearSentimentTotal[1] * 100) || 0 ) + '%';
 
       console.log('processedData', processedData);
       return processedData;
