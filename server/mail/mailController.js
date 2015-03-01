@@ -53,11 +53,11 @@ function verficationOfAccount(req, res, next) {
             //     res.redirect('/#/dashboard');
             // });
 
-
-            req.body.tempUser = foundTemp;
+            req.body = foundTemp;
             // foundTemp.remove();
             // console.log('next');
             // console.log('next');
+            console.log('found');
             next();
         }
         else {

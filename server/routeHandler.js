@@ -25,14 +25,14 @@ routeHandler.use(cookieParser());
 routeHandler.use(bodyParser.json());
 // routeHandler.use(cors());
 
-// var sessionStore = new MongoStore({mongooseConnection: mongoose.connection});
-// var sessionOpts = {
-//   saveUninitialized: true, // saved new sessions
-//   resave: false, // do not automatically write to the session store
-//   store: sessionStore,
-//   secret: 'secret',
-//   cookie : { httpOnly: true, maxAge: 2419200000 } // configure when sessions expires
-// }
+var sessionStore = new MongoStore({mongooseConnection: mongoose.connection});
+var sessionOpts = {
+  saveUninitialized: true, // saved new sessions
+  resave: false, // do not automatically write to the session store
+  store: sessionStore,
+  secret: 'secret',
+  cookie : { httpOnly: true, maxAge: 2419200000 } // configure when sessions expires
+}
 
 // routeHandler.use(morgan('tiny'));
 
