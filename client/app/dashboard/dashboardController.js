@@ -4,23 +4,47 @@ angular
 
   DashboardController.$inject = [
     '$scope',
+    '$http',
     'DashboardSentimentFactory',
     'DashboardCommentsFactory',
     'AuthFactory'
   ];
 
-  function DashboardController ($scope, DashboardSentimentFactory, DashboardCommentsFactory, AuthFactory) {
+  function DashboardController ($scope, $http, DashboardSentimentFactory, DashboardCommentsFactory, AuthFactory) {
     // console.log('sampleData', sampleData);
-    var sampleData = [];
-    var sortedData = DashboardSentimentFactory.sortByTime(sampleData);
-    // console.log('sortedData', sortedData);
-    var dataProcessedTime = DashboardSentimentFactory.changeTimeFormat(sortedData);
-    // console.log('dataProcessedTime', dataProcessedTime);
+
+    $scope.data = {};
+    $scope.sortedData = {};
+    $scope.dataProcessedTime = {};
+    
     $scope.averageSentiment = '0';
     $scope.responseCount = '0';
 
     $scope.sentimentChart = null;
     $scope.responsesChart = null;
+
+    $scope.initialize = function() {
+      $http.get('/comments').
+        success(function(data, status, headers, config) {
+          console.log(data);
+          $scope.data = data;
+          console.log($scope.data);
+          // this callback will be called asynchronously
+          // when the response is available
+          $scope.sortedData = DashboardSentimentFactory.sortByTime($scope.data);
+          // $scope.sortedData = DashboardSentimentFactory.sortByTime(sampleData);
+          // console.log('sortedData', sortedData);
+          $scope.dataProcessedTime = DashboardSentimentFactory.changeTimeFormat($scope.sortedData);
+          // console.log('$scope.dataProcessedTime', $scope.dataProcessedTime);
+          $scope.showCharts();
+        }).
+        error(function(data, status, headers, config) {
+          // called asynchronously if an error occurs
+          // or server returns response with an error status.
+        });
+    }
+
+
 
     $scope.showCharts = function() {
 
@@ -70,47 +94,50 @@ angular
           }
         });
 
-      $scope.responsesChart = c3.generate({
-        bindto: '#responses-chart',
-        data: {
-          columns: [
-            ['data', 30, 200, 100, 400, 150, 250, 138]
-          ]
-        },
-        grid: {
-          y: {
-            show: true
-          }
-        },
-        legend: {
-          show: false
-        },
-        axis: {
-          x: {
-            type: 'category',
-            categories: ['SUN', 'MON', 'TUE', 'WED', 'THU', 'FRI', 'SAT'],
+        $scope.responsesChart = c3.generate({
+          bindto: '#responses-chart',
+          data: {
+            columns: [
+              ['data', 30, 200, 100, 400, 150, 250, 138]
+            ]
           },
-          y: {
-            max: 500,
-            min: 0,
-            padding: {top:0, bottom:0},
-            label: { // ADD
-              text: 'Number of Responses',
-              position: 'outer-middle'
+          grid: {
+            y: {
+              show: true
+            }
+          },
+          legend: {
+            show: false
+          },
+          axis: {
+            x: {
+              type: 'category',
+              categories: ['SUN', 'MON', 'TUE', 'WED', 'THU', 'FRI', 'SAT'],
             },
-            tick: {
-              count: 6
+            y: {
+              max: 500,
+              min: 0,
+              padding: {top:0, bottom:0},
+              label: { // ADD
+                text: 'Number of Responses',
+                position: 'outer-middle'
+              },
+              tick: {
+                count: 6
+              }
             }
           }
-        }
-      });
+        });
+
+        $scope.changeSentimentChartView('week');
+        $scope.changeResponsesChartView('week');
 
     }
 
     $scope.changeSentimentChartView = function(time) {
       switch (time) {
         case 'day':
-          var tempData = DashboardSentimentFactory.filterByDay(dataProcessedTime);
+          var tempData = DashboardSentimentFactory.filterByDay($scope.dataProcessedTime);
           var newData = tempData[0];
           $scope.averageSentiment = tempData[1];
           var arrayOfHours = Object.keys(newData);
@@ -132,7 +159,7 @@ angular
           });
           break;
         case 'week':
-          var tempData = DashboardSentimentFactory.filterByWeek(dataProcessedTime);
+          var tempData = DashboardSentimentFactory.filterByWeek($scope.dataProcessedTime);
           var newData = tempData[0];
           $scope.averageSentiment = tempData[1];
           var arrayOfDays = Object.keys(newData);
@@ -153,7 +180,7 @@ angular
           });
           break;
         case 'month':
-          var tempData = DashboardSentimentFactory.filterByMonth(dataProcessedTime);
+          var tempData = DashboardSentimentFactory.filterByMonth($scope.dataProcessedTime);
           var newData = tempData[0];
           $scope.averageSentiment = tempData[1];
           var arrayOfMonths = Object.keys(newData);
@@ -175,7 +202,7 @@ angular
           });
           break;
         case 'year':
-          var tempData = DashboardSentimentFactory.filterByYear(dataProcessedTime);
+          var tempData = DashboardSentimentFactory.filterByYear($scope.dataProcessedTime);
           var newData = tempData[0];
           $scope.averageSentiment = tempData[1];
           var arrayOfYears = Object.keys(newData);
@@ -197,7 +224,7 @@ angular
     $scope.changeResponsesChartView = function(time) {
       switch (time) {
         case 'day':
-          var newData = DashboardCommentsFactory.filterByDay(dataProcessedTime);
+          var newData = DashboardCommentsFactory.filterByDay($scope.dataProcessedTime);
           $scope.responseCount = _.reduce(newData, function(result, value, key) {
             result += value
             return result
@@ -221,7 +248,7 @@ angular
           });
           break;
         case 'week':
-          var newData = DashboardCommentsFactory.filterByWeek(dataProcessedTime);
+          var newData = DashboardCommentsFactory.filterByWeek($scope.dataProcessedTime);
           $scope.responseCount = _.reduce(newData, function(result, value, key) {
             result += value
             return result
@@ -246,7 +273,7 @@ angular
           break;
         case 'month':
 
-          var newData = DashboardCommentsFactory.filterByMonth(dataProcessedTime);
+          var newData = DashboardCommentsFactory.filterByMonth($scope.dataProcessedTime);
           $scope.responseCount = _.reduce(newData, function(result, value, key) {
             result += value
             return result
@@ -269,7 +296,7 @@ angular
           });
           break;
         case 'year':
-          var newData = DashboardCommentsFactory.filterByYear(dataProcessedTime);
+          var newData = DashboardCommentsFactory.filterByYear($scope.dataProcessedTime);
           $scope.responseCount = _.reduce(newData, function(result, value, key) {
             result += value
             return result
