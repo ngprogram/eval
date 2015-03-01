@@ -59996,5 +59996,5 @@ var sampleData = [ { phone_number: '+13599631611',
     date: 1370114500302,
     comment: 'I felt sad after speaking.',
     companyId: 1234,
-    employee_name: 'Jake',
-    score: 0.7914930693805218 } ]
+    employee_name: 'Sydney',
+    score: -0.01582843321375549 } ];
