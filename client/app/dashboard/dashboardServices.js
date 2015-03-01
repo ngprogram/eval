@@ -81,7 +81,7 @@ angular
       var processedData = {};
       for (var i = 0; i < data.length; i ++) {
         var month = data[i].date.getMonth();
-        if (processedData[month] && isWithinPastMonth(data[i].date)) {
+        if (processedData[month] && isWithinPastYear(data[i].date)) {
           processedData[month][0] += data[i].score;
           processedData[month][1]++;
         } else {
@@ -208,14 +208,32 @@ angular
       // console.log('now', now);
       //get the month in the year
       var year = now.getFullYear();
+      var month = now.getMonth();
+      // console.log(year);
+      var nearestFirstDayOfMonthAtMidnight = new Date(year, month, 1);
+      console.log('nearestFirstDayOfMonthAtMidnight', nearestFirstDayOfMonthAtMidnight);
+      //compare if the value is greater than this one above
+      if (date > nearestFirstDayOfMonthAtMidnight) {
+        inPastMonth = true;
+      }
+      return inPastMonth;
+    }
+
+    function isWithinPastYear(date) {
+      var inPastYear = false;
+      //get now date
+      var now = new Date();
+      // console.log('now', now);
+      //get the month in the year
+      var year = now.getFullYear();
       // console.log(year);
       var nearestJanuaryDateAtMidnight = new Date(year, 0, 1);
       // console.log('nearestJanuaryDateAtMidnight', nearestJanuaryDateAtMidnight);
       //compare if the value is greater than this one above
       if (date > nearestJanuaryDateAtMidnight) {
-        inPastMonth = true;
+        inPastYear = true;
       }
-      return inPastMonth;
+      return inPastYear;
     }
 
     return factory;

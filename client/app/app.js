@@ -1,7 +1,7 @@
 angular
   .module('eval', [
     'eval.dashboard',
-    // 'eval.employees',
+    'eval.employees',
     'eval.auth',
     'eval.navbar',
     'ui.router'
