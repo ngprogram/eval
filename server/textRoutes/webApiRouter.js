@@ -59,19 +59,20 @@ function processRequest(req, callback) {
 function saveComment(req, res) {
   processRequest(req, function(data) {
     var cmt = data.Body;
+    var name = cmt.split(' ')[1];
+    var empName = name.substring(0,1).toUpperCase() + name.substring(1);
     if (cmt.split(' ').length >= 3) {
         if (typeof parseInt(cmt[0],10) === 'number' && typeof cmt[1] === 'string') {
           var sent = cmt.split(' ').slice(2).join(' ');
           var comm = new Comment({
             id: data.SMSSid,
             companyId: '' + cmt.split(' ')[0],
-            employee_name: cmt.split(' ')[1],
+            employee_name: empName,
             comment : sent,
             phone_number: data.From
           });
           console.log(comm);
           CommController.saveComment(comm, function(err, savedC) {
-            console.log('saved',savedC);
             res.sendStatus(200);
           });
         }
