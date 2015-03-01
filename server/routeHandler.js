@@ -23,18 +23,18 @@ var MongoStore = require('connect-mongo')(session);
 
 routeHandler.use(cookieParser());
 routeHandler.use(bodyParser.json());
-routeHandler.use(cors());
+// routeHandler.use(cors());
 
-var sessionStore = new MongoStore({mongooseConnection: mongoose.connection});
-var sessionOpts = {
-  saveUninitialized: true, // saved new sessions
-  resave: false, // do not automatically write to the session store
-  store: sessionStore,
-  secret: 'secret',
-  cookie : { httpOnly: true, maxAge: 2419200000 } // configure when sessions expires
-}
+// var sessionStore = new MongoStore({mongooseConnection: mongoose.connection});
+// var sessionOpts = {
+//   saveUninitialized: true, // saved new sessions
+//   resave: false, // do not automatically write to the session store
+//   store: sessionStore,
+//   secret: 'secret',
+//   cookie : { httpOnly: true, maxAge: 2419200000 } // configure when sessions expires
+// }
 
-routeHandler.use(morgan('tiny'));
+// routeHandler.use(morgan('tiny'));
 
 routeHandler.use(session({
   secret: 'secretttt',
@@ -43,17 +43,19 @@ routeHandler.use(session({
 }));
 
 routeHandler.use(passport.initialize());
-routeHandler.use(passport.session(sessionOpts));
+routeHandler.use(passport.session());
 
 routeHandler.use(express.static(__dirname + '/../client'));
 
 routeHandler.post('/login', passport.authenticate('local-login'), function(req, res) {
   res.send(200, req.user);
 });
-
 routeHandler.use('/comments', userController.isLoggedIn, commentController.getComments);
 routeHandler.post('/signup', mailController.sendConfirmationEmail);
-routeHandler.use('/verify', mailController.verficationOfAccount);
+routeHandler.get('/verify', mailController.verficationOfAccount, passport.authenticate('local-signup', {
+  successRedirect: '/#/dashboard',
+  failureRedirect: '/'
+}));
 routeHandler.post('/forgot', mailController.sendForgotPasswordEmail)
 routeHandler.post('/reset', mailController.verifyResetCode);
 routeHandler.post('/reset-password', mailController.resetPassword);

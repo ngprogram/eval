@@ -36,4 +36,20 @@ passport.use('local-login', new LocalStrategy(function(username, password, done)
   });
 }));
 
+
+passport.use('local-signup', new LocalStrategy({
+    passReqToCallback : true
+  },
+  function(req, username, password, done) {
+    var tempUser = req.body.tempUser;
+    User.create(tempUser, function(err, createdUser) {
+      if (!err) {
+        console.log('created');
+        done(null, createdUser);
+      }
+    });
+  }
+));
+
+
 module.exports = passport;

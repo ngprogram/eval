@@ -9,7 +9,6 @@ function NavbarController($scope, $http, AuthFactory) {
     return $scope.currentUser !== undefined;
   }
 
-
   $scope.user.logout = function() {
     AuthFactory.logout();
   };
