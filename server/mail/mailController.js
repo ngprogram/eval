@@ -49,7 +49,8 @@ function verficationOfAccount(req, res, next) {
         if(!err && foundTemp) {
             User.create(foundTemp, function(err, createdUser) {
                 foundTemp.remove();
-                res.send(200, createdUser);
+                req.user = createdUser;
+                res.redirect('/#/dashboard');
             });
 
 
