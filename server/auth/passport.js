@@ -16,7 +16,6 @@ passport.deserializeUser(function(id, done) {
 passport.use('local-login', new LocalStrategy({
   usernameField: "email",
 }, function(email, password, done) {
-  console.log('loggin in');
   User.findOne({ email: email}, function(err, user) {
     if (err) {
       return done(err);
@@ -43,7 +42,6 @@ passport.use('local-signup', new LocalStrategy({
     passReqToCallback : true
   },
   function(req, username, password, done) {
-    console.log('signup');
     var tempUser = req.body;
     User.create(tempUser, function(err, createdUser) {
       if (!err) {
