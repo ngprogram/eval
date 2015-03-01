@@ -11,10 +11,9 @@ function saveComment(comment, callback) {
 
 function getComments(req, res) {
   var companyId = req.user.companyId;
-  console.log('getting', companyId);
-  Comment.find({companyId: companyId}, function(err, foundComments) {
-    console.log('err');
-    console.log(err);
+  console.log('getting');
+  console.log(companyId);
+  Comment.find({}, function(err, foundComments) {
     console.log('found');
     console.log(foundComments);
     if (err) {
