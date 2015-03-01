@@ -30,14 +30,18 @@ angular
    .state('dashboard', {
       url: '/dashboard',
       templateUrl: 'app/dashboard/dashboard.html',
-      controller: 'DashboardController'
-      // add resolve later
+      controller: 'DashboardController',
+      resolve: {
+        loggedIn: checkLoggedIn
+      }
    })
    .state('employees', {
       url: '/employees',
       templateUrl: 'app/employees/employees.html',
-      controller: 'EmployeesController'
-      // add resolve later
+      controller: 'EmployeesController',
+      resolve: {
+        loggedIn: checkLoggedIn
+      }
    });
 
   //send base url to either login or dashboard depending if user is authenticated
@@ -67,6 +71,7 @@ function checkLoggedIn($q, $timeout, $http, $location, $rootScope) {
     } else {
       console.log('not logged in ');
       $rootScope.currentUser = undefined;
+      $location.path('/');
       $timeout(deferred.resolve, 0);
     }
   }).error(function(err) {
