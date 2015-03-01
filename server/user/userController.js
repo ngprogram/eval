@@ -46,7 +46,8 @@ function isLoggedIn(req, res, next) {
   if (req.isAuthenticated()) {
     return next();
   }
-  res.redirect('/');
+  // angular redirects
+  res.send(200, 0);
 };
 
 module.exports = userController;
