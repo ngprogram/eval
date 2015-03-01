@@ -27,11 +27,13 @@ angular
       var processedData = {};
       for (var i = 0; i < data.length; i ++) {
         var hour = data[i].date.getHours();
-        if (processedData[hour] && isWithinPastDay(data[i].date)) {
-          processedData[hour][0] += data[i].score;
-          processedData[hour][1]++;
-        } else {
-          processedData[hour] = [data[i].score, 1];
+        if (isWithinPastDay(data[i].date)) {
+          if (processedData[hour]) {
+            processedData[hour][0] += data[i].score;
+            processedData[hour][1]++;
+          } else {
+            processedData[hour] = [data[i].score, 1];
+          }
         }
       }
       console.log('pre procsssedData', processedData);
@@ -58,11 +60,13 @@ angular
       for (var i = 0; i < data.length; i ++) {
         // console.log('MEMEMMEE', data[i].date)
         var day = data[i].date.getDay();
-        if (processedData[day] && isWithinPastWeek(data[i].date)) {
-          processedData[day][0] += data[i].score;
-          processedData[day][1]++;
-        } else {
-          processedData[day] = [data[i].score, 1];
+        if (isWithinPastWeek(data[i].date)) {
+          if (processedData[day]) {
+            processedData[day][0] += data[i].score;
+            processedData[day][1]++;
+          } else {
+            processedData[day] = [data[i].score, 1];
+          }
         }
       }
 
@@ -87,11 +91,13 @@ angular
       var processedData = {};
       for (var i = 0; i < data.length; i ++) {
         var month = data[i].date.getMonth();
-        if (processedData[month] && isWithinPastYear(data[i].date)) {
-          processedData[month][0] += data[i].score;
-          processedData[month][1]++;
-        } else {
-          processedData[month] = [data[i].score, 1];
+        if (isWithinPastYear(data[i].date)) {
+          if (processedData[month]) {
+            processedData[month][0] += data[i].score;
+            processedData[month][1]++;
+          } else {
+            processedData[month] = [data[i].score, 1];
+          }
         }
       }
 
@@ -259,10 +265,12 @@ angular
       var processedData = {};
       for (var i = 0; i < data.length; i ++) {
         var hour = data[i].date.getHours();
-        if (processedData[hour] && isWithinPastDay(data[i].date)) {
-          processedData[hour]++;
-        } else {
-          processedData[hour] = 1;
+        if (isWithinPastDay(data[i].date)) {
+          if (processedData[hour]) {
+            processedData[hour]++;
+          } else {
+            processedData[hour] = 1;
+          }
         }
       }
       console.log('pre procsssedData', processedData);
@@ -276,10 +284,12 @@ angular
       for (var i = 0; i < data.length; i ++) {
         // console.log('MEMEMMEE', data[i].date)
         var day = data[i].date.getDay();
-        if (processedData[day] && isWithinPastWeek(data[i].date)) {
-          processedData[day]++;
-        } else {
-          processedData[day] = 1;
+        if (isWithinPastWeek(data[i].date)) {
+          if (processedData[day]) {
+            processedData[day]++;
+          } else {
+            processedData[day] = 1;
+          }
         }
       }
 
@@ -292,7 +302,7 @@ angular
       var processedData = {};
       for (var i = 0; i < data.length; i ++) {
         var month = data[i].date.getMonth();
-        console.log(isWithinPastYear(data[i].date));
+        // console.log(isWithinPastYear(data[i].date));
         if (isWithinPastYear(data[i].date)) {
           if (processedData[month]) {
             processedData[month]++;
