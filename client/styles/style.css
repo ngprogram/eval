@@ -191,15 +191,16 @@ table {
 }
 
 td {
-  border: 1px solid whitesmoke;
+  border: 2px solid whitesmoke;
   text-align: center;
   vertical-align: middle;
+  padding-top: 5px;
 }
 
 th {
   padding-top: 10px;
   padding-bottom: 10px;
-  border: 1px solid whitesmoke;
+  border: 2px solid whitesmoke;
   text-align: center;
   vertical-align: middle;
   background-color: #4E859B;
@@ -221,11 +222,14 @@ tr {
 }
 
 .main-row:hover {
-  background-color: #727272;
+  background-color: #F7AA60;
 }
 
+.even-rows {
+  background-color: #E6F4FA;
+}
 .odd-rows {
-  background-color: #ddd;
+  background-color: #BEDAE5;
 }
 
 .scroll-outer {
