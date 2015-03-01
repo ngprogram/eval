@@ -14,11 +14,15 @@ angular
     factory.processSingleEmployeeData = processSingleEmployeeData;
 
     function processEmployeesData(data) {
+      console.log(7686589, data);
+      var resultArray = [];
       var separatedData = separateDataByEmployee(data);
       for (var name in separatedData) {
-        separatedData[name] = processSingleEmployeeData(separatedData[name]);
+        var obj = processSingleEmployeeData(separatedData[name]);
+        obj.employee_name = name;
+        resultArray.push(obj);
       }
-      return separatedData;
+      return resultArray;
     }
 
     function separateDataByEmployee(data) {

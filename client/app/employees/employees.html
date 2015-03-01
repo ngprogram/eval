@@ -25,7 +25,7 @@
             <tbody ng-repeat="(name, value) in employees" ng-class-odd="'odd-rows'" ng-class-even='"even-rows"'>
               <tr class="main-row" ng-click="toggleDetail($index)">
                 <td>{{$index + 1}}</td>
-                <td>{{name}}</td>
+                <td>{{value.employee_name}}</td>
                 <td>{{value.averageSentiment.week}}</td>
                 <td>{{value.averageSentiment.month}}</td>
                 <td>{{value.averageSentiment.year}}</td>
