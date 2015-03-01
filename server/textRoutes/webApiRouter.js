@@ -72,6 +72,7 @@ function saveComment(req, res) {
           console.log(comm);
           CommController.saveComment(comm, function(err, savedC) {
             console.log('saved',savedC);
+            res.sendStatus(200);
           });
         }
       }
