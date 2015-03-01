@@ -1,36 +1,41 @@
 <div ng-init="showCharts()">
 
-  <div class="sentiment-section">
-    <div class="sentiment-left">
-      <!-- <div class="sentiment-panel">AVERAGE SENTIMENT DAY WEEK MONTH YEAR</div> -->
-      <div class="sentiment-panel">AVERAGE SENTIMENT 
-        <button class="sentiment-button" ng-click="changeSentimentChartView('day')">DAY</button>
-        <button class="sentiment-button" ng-click="changeSentimentChartView('week')">WEEK</button>
-        <button class="sentiment-button" ng-click="changeSentimentChartView('month')">MONTH</button>
-        <button class="sentiment-button" ng-click="changeSentimentChartView('year')">YEAR</button>
+  <div class="chartSection">
+    <div class="leftSection">
+      <div class="chartNav">
+        <span class="chartName">AVERAGE SENTIMENT</span>
+        <span class="filterButtons">
+          <button class="filterBtn" ng-click="changeSentimentChartView('day')">DAY</button>
+          <button class="filterBtn" ng-click="changeSentimentChartView('week')">WEEK</button>
+          <button class="filterBtn" ng-click="changeSentimentChartView('month')">MONTH</button>
+          <button class="filterBtn" ng-click="changeSentimentChartView('year')">YEAR</button>
+        </span>
       </div>
-      <div id="sentiment-chart"></div>
+      <div id="sentiment-chart" class="chartDiv"></div>
     </div>
-    <div class="sentiment-right">
-      <p>AVERAGE</p>
-      <p>{{averageSentiment}}</p>
-      <p>% POSITIVITY</p>
+    <div class="rightSection">
+      <div class="avgTotalLabel">AVERAGE</div>
+      <p class="valueLabel">{{averageSentiment | number:2 }}</p>
+      <p class="valueDesc">% POSITIVITY</p>
     </div>
   </div>
-
-  <div class="responses-section">
-    <div class="responses-left">
-      <div class="responses-panel">NUMBER OF RESPONSES 
-        <button class="responses-button" ng-click="changeResponsesChartView('day')">DAY</button>
-        <button class="responses-button" ng-click="changeResponsesChartView('week')">WEEK</button>
-        <button class="responses-button" ng-click="changeResponsesChartView('month')">MONTH</button>
-        <button class="responses-button" ng-click="changeResponsesChartView('year')">YEAR</button>
+  <div class="chartSection" id="numRes">
+    <div class="leftSection">
+      <div class="chartNav">
+        <span  class="chartName">NUMBER OF RESPONSES</span>
+        <span class="filterButtons">
+          <button class="filterBtn" ng-click="changeResponsesChartView('day')">DAY</button>
+          <button class="filterBtn" ng-click="changeResponsesChartView('week')">WEEK</button>
+          <button class="filterBtn" ng-click="changeResponsesChartView('month')">MONTH</button>
+          <button class="filterBtn" ng-click="changeResponsesChartView('year')">YEAR</button>
+        </span>
       </div>
-      <div id="responses-chart"></div>
+      <div id="responses-chart" class="chartDiv"></div>
     </div>
-    <div class="responses-right">
-      <p>{{responseCount}}</p>
-      <p>RESPONSES</p>
+    <div class="rightSection">
+      <div class="avgTotalLabel">TOTAL</div>
+      <p class="valueLabel">{{responseCount}}</p>
+      <p class="valueDesc">RESPONSES</p>
     </div>
   </div>
 
