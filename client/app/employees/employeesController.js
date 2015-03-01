@@ -6,9 +6,11 @@ angular
     '$scope',
     'EmployeesFactory',
     'AuthFactory',
+    '$rootScope'
   ];
 
-  function EmployeesController ($scope, EmployeesFactory, AuthFactory) {
+  function EmployeesController ($scope, EmployeesFactory, AuthFactory, $rootScope) {
+    var sampleData = $rootScope.data;
     $scope.employees = EmployeesFactory.processEmployeesData(sampleData);
     console.log('EMPLOYEESDATA', $scope.employees);
 
