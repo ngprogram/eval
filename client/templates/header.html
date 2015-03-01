@@ -1,9 +1,11 @@
 <div id="headerbar" ng-controller="NavbarController">
   <div id="eval"><a href='/'><img src="../images/evalLogo.png"  width="50" alt="eval"></a></div>
     <ul id="navLinks">
-      <li><a href="/#/employees" ng-show="isLoggedIn()">EMPLOYEES</a></li>
-      <li><a href="/#/login" ng-hide="isLoggedIn()" >LOGIN</a></li>
-      <li><a href="/#/signup" ng-hide="isLoggedIn()">SIGNUP</a></li>
+      
+      <li><a ui-sref="dashboard" ng-show="isLoggedIn()">DASHBOARD</a></li>
+      <li><a ui-sref="employees" ng-show="isLoggedIn()">EMPLOYEES</a></li>
+      <li><a ui-sref="login" ng-hide="isLoggedIn()" >LOGIN</a></li>
+      <li><a ui-sref="signup" ng-hide="isLoggedIn()">SIGNUP</a></li>
       <li><a href='' ng-click='user.logout()' ng-show="isLoggedIn()">LOGOUT</a></li>
     </ul>
   </div>
