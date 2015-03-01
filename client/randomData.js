@@ -1,5 +1,5 @@
 var sampleData = [ { phone_number: '+1906269592',
-    date: 1383618313190,
+    date: 1425174146000,
     comment: 'i was really pleased with my experience. definitely coming back',
     companyId: 1234,
     employee_name: 'Kim',
