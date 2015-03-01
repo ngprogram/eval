@@ -61,10 +61,8 @@ function checkLoggedIn($q, $timeout, $http, $location, $rootScope) {
   console.log('called');
   $http.get('/loggedin')
     .success(function(user) {
-    if (user !== '0') {
+    if (user !== 0) {
       $rootScope.currentUser = user;
-      console.log('signedIn');
-      console.log($rootScope);
       $timeout(deferred.resolve, 0);
     } else {
       console.log('not logged in ');
