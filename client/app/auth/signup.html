@@ -1,12 +1,12 @@
 <div id="signupHtml">
-  <div>SIGNUP</div>
+  <div class="authTitle">SIGNUP</div>
     <form ng-submit="submitSignup(username, businessName, email, password)">
       <div><input type="text" placeholder='username' ng-model="username"></div>
       <div><input type="text" placeholder='business name' ng-model="businessName"></div>
       <div><input type="email" placeholder='email' ng-model="email"></div>
       <div><input type="password" placeholder='password' ng-model="password"></div>
       <div id="errMessage" ng-show="hasError">{{errorMessage}}</div>
-      <div><button type="submit">SUBMIT</button></div>
+      <div><button class="authBtn" type="submit">SUBMIT</button></div>
     </form>
     <div ng-show="hasEmailBeenSent">
       <p>A confirmation email has been sent</p>
