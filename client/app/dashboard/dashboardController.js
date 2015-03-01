@@ -6,16 +6,17 @@ angular
     '$http',
     'DashboardSentimentFactory',
     'DashboardCommentsFactory',
-    'AuthFactory'
+    'AuthFactory',
+    '$rootScope'
   ];
 
-  function DashboardController ($scope, $http, DashboardSentimentFactory, DashboardCommentsFactory, AuthFactory) {
+  function DashboardController ($scope, $http, DashboardSentimentFactory, DashboardCommentsFactory, AuthFactory, $rootScope) {
     // console.log('sampleData', sampleData);
 
     $scope.data = {};
     $scope.sortedData = {};
     $scope.dataProcessedTime = {};
-    
+
     $scope.averageSentiment = '0';
     $scope.responseCount = '0';
 
@@ -27,6 +28,7 @@ angular
         success(function(data, status, headers, config) {
           console.log(data);
           $scope.data = data;
+          $rootScope.data = data;
           console.log($scope.data);
           // this callback will be called asynchronously
           // when the response is available
