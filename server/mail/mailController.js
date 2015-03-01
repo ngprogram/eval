@@ -15,6 +15,9 @@ mailController.verifyResetCode = verifyResetCode;
 mailController.resetPassword = resetPassword;
 
 function sendConfirmationEmail(req, res, next) {
+    console.log('sending');
+    console.log(req.body);
+
     var tempAccount = req.body;
     var email = tempAccount.email;
     var rand = Math.floor((Math.random() * 1000000000000))
@@ -26,6 +29,7 @@ function sendConfirmationEmail(req, res, next) {
             res.sendStatus(401);
         }
         if (!err) {
+            console.log('created account');
             var link="http://"+req.get('host')+"/verify?id="+rand;
             sendgrid.send(mailCreator.createVerificationEmail(email, link), function(err, json) {
                 if (err) {
@@ -45,7 +49,8 @@ function verficationOfAccount(req, res, next) {
         if(!err && foundTemp) {
             User.create(foundTemp, function(err, createdUser) {
                 foundTemp.remove();
-                res.send(200, createdUser);
+                req.user = createdUser;
+                res.redirect('/#/dashboard');
             });
 
 

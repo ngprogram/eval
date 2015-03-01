@@ -22,6 +22,13 @@ function AuthController($scope, $location, $http, $state, AuthFactory) {
       AuthFactory.signup(username, businessName, email, password, function(errorMessage) {
         $scope.hasError = true;
         $scope.errorMessage = errorMessage;
+      })
+      .success(function() {
+        $scope.email = "";
+        $scope.username = "";
+        $scope.password = "";
+        $scope.businessName = "";
+        $scope.hasEmailBeenSent = true;
       });
     }
   };

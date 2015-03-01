@@ -1,6 +1,6 @@
 var plan = require('flightplan');
 
-var appName = 'eval';
+var appName = 'geteval';
 var username = 'azai91';
 var startFile = 'server.js';
 
@@ -16,19 +16,18 @@ plan.target('staging', [
 ]);
 
 plan.target('production', [
-//add in another server if you have more than one
-// {
-//   host: '104.131.93.216',
-//   username: username,
-//   agent: process.env.SSH_AUTH_SOCK
-// }
+  {
+    host: 'geteval.cloudapp.net',
+    username: username,
+    agent: process.env.SSH_AUTH_SOCK
+  }
 ]);
 
 // run commands on localhost
 plan.local(function(local) {
   // uncomment these if you need to run a build on your machine first
   // local.log('Run build');
-  // local.exec('git add -f bower_components');
+  local.exec('git add -f client/lib');
 
   local.log('Copy files to remote hosts');
   var filesToCopy = local.exec('git ls-files', {silent: true});
@@ -48,5 +47,5 @@ plan.remote(function(remote) {
 
   remote.log('Reload application');
   remote.sudo('ln -snf ~/' + tmpDir + ' ~/'+appName, {user: username});
-  remote.exec('sudo restart eval');
+  remote.exec('sudo restart geteval');
 });
