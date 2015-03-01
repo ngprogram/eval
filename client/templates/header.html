@@ -1,1 +1,9 @@
-header.html
+<div ng-controller="NavbarController">
+  <span>eval</span>
+  <a href='/'>Home</a>
+  <a href="/#/dashboard" ng-show="isLoggedIn()">Dashboard</a>
+  <a href="/#/employees" ng-show="isLoggedIn()">Employees</a>
+  <a href="/#/login" ng-hide="isLoggedIn()">login</a>
+  <a href="/#/signup" ng-hide="isLoggedIn()">signup</a>
+  <a href='' ng-click='user.logout()' ng-show="isLoggedIn()">Logout</a>
+</div>

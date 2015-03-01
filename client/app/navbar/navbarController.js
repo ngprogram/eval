@@ -5,7 +5,10 @@ angular
 NavbarController.$inject = ['$scope', '$http', 'AuthFactory'];
 function NavbarController($scope, $http, AuthFactory) {
   $scope.user = {};
-  // $scope.user.email = AuthFactory.getEmail();
+  $scope.isLoggedIn = function() {
+    return $scope.currentUser !== undefined;
+  }
+
 
   $scope.user.logout = function() {
     AuthFactory.logout();
