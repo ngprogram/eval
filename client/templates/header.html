@@ -1,9 +1,9 @@
-<div>
+<div ng-controller="NavbarController">
   <span>eval</span>
-
-  <a ui-sref="dashboard">Dashboard</a>
-  <a ui-sref="employees">Employees</a>
-  <a ui-sref="login">login</a>
-  <a ui-sref="signup">signup</a>
-  <a href='' ng-click='user.logout()'>Logout</a>
+  <a href='/'>Home</a>
+  <a href="/#/dashboard" ng-show="isLoggedIn()">Dashboard</a>
+  <a href="/#/employees" ng-show="isLoggedIn()">Employees</a>
+  <a href="/#/login" ng-hide="isLoggedIn()">login</a>
+  <a href="/#/signup" ng-hide="isLoggedIn()">signup</a>
+  <a href='' ng-click='user.logout()' ng-show="isLoggedIn()">Logout</a>
 </div>

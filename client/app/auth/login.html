@@ -1,25 +1,15 @@
 <div>
   <div>LOGIN</div>
 
-  <form>  
+  <form ng-submit='submitLogin(email, password)'>
     <div>
       <input type='email' placeholder='email' ng-model='email'>
     </div>
-
     <div>
       <input type='password' placeholder='password' ng-model='password'>
     </div>
-    
     <div ng-show='hasError'>{{errorMessage}}</div>
+    <button type="submit">SUBMIT</button>
   </form>
-
-  <div>
-
-    <a ui-sref='signup'>SIGN UP</a>
-    
-    <div>
-      <button ng-click='submitLogin(email, password)'>SUBMIT</button>
-    </div>
-
   </div>
 </div>
