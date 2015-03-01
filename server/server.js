@@ -6,11 +6,11 @@ var config = require('config');
 
 mongoose.connect(config.get('mongo'));
 
-var port = process.env.PORT || 8000;
+var port = 80;
 
-if (process.env.NODE_ENV === 'production' || process.env.NODE_ENV === 'staging') {
-  port = 80;
-}
+// if (process.env.NODE_ENV === 'production' || process.env.NODE_ENV === 'staging') {
+//   port = 80;
+// }
 
 console.log('Server listening on ' + port);
 
