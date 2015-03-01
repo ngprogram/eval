@@ -15,7 +15,7 @@ angular
     console.log('sortedData', sortedData);
     var dataProcessedTime = DashboardFactory.changeTimeFormat(sortedData);
     console.log('dataProcessedTime', dataProcessedTime);
-    $scope.averageSentiment = '80';
+    $scope.averageSentiment = '0';
     $scope.responseCount = '140';
 
     $scope.sentimentChart = null;
@@ -103,7 +103,9 @@ angular
     $scope.changeSentimentChartView = function(time) {
       switch (time) {
         case 'day':
-          var newData = DashboardFactory.filterByDay(dataProcessedTime);
+          var tempData = DashboardFactory.filterByDay(dataProcessedTime);
+          var newData = tempData[0];
+          $scope.averageSentiment = tempData[1];
           $scope.sentimentChart.load({
             columns: [
               ['data', newData[0], newData[1], newData[2], newData[3], newData[4], newData[5], newData[6],
@@ -115,7 +117,9 @@ angular
           });
           break;
         case 'week':
-          var newData = DashboardFactory.filterByWeek(dataProcessedTime);
+          var tempData = DashboardFactory.filterByWeek(dataProcessedTime);
+          var newData = tempData[0];
+          $scope.averageSentiment = tempData[1];
           console.log('newData', newData)
           $scope.sentimentChart.load({
             columns: [
@@ -125,7 +129,9 @@ angular
           });
           break;
         case 'month':
-          var newData = DashboardFactory.filterByMonth(dataProcessedTime);
+          var tempData = DashboardFactory.filterByMonth(dataProcessedTime);
+          var newData = tempData[0];
+          $scope.averageSentiment = tempData[1];
           $scope.sentimentChart.load({
             columns: [
               ['data', newData[0], newData[1], newData[2], newData[3], newData[4], newData[5], newData[6], newData[7], newData[8], newData[9], newData[10], newData[11]]
@@ -134,7 +140,9 @@ angular
           });
           break;
         case 'year':
-          var newData = DashboardFactory.filterByYear(dataProcessedTime);
+          var tempData = DashboardFactory.filterByYear(dataProcessedTime);
+          var newData = tempData[0];
+          $scope.averageSentiment = tempData[1];
           var arrayOfYears = Object.keys(newData);
           var newDataProcessed = ['data'];
           for (var i = 0; i < arrayOfYears.length; i++) {
