@@ -1,5 +1,5 @@
 <div class="employees-table-section">
-  Employees
+  <div class="empLabel">EMPLOYEES</div>
   <table class = "employees-table">
     <thead>
       <tr>
@@ -22,7 +22,7 @@
       <td colspan="8">
         <div class="scroll-outer">
           <table>
-            <tbody ng-repeat="(name, value) in employees" ng-class-odd="'odd-rows'">
+            <tbody ng-repeat="(name, value) in employees" ng-class-odd="'odd-rows'" ng-class-even='"even-rows"'>
               <tr class="main-row" ng-click="toggleDetail($index)">
                 <td>{{$index + 1}}</td>
                 <td>{{name}}</td>
