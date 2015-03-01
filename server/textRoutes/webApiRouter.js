@@ -59,7 +59,7 @@ function processRequest(req, callback) {
 function saveComment(req, res) {
   processRequest(req, function(data) {
     var cmt = data.Body;
-    if (cmt.split(' ').length > 3) {
+    if (cmt.split(' ').length >= 3) {
         if (typeof parseInt(cmt[0],10) === 'number' && typeof cmt[1] === 'string') {
           var sent = cmt.split(' ').slice(2).join(' ');
           var comm = new Comment({
@@ -70,7 +70,7 @@ function saveComment(req, res) {
             phone_number: data.From
           });
           console.log(comm);
-          CommController.saveComment(comm, function(savedC) {
+          CommController.saveComment(comm, function(err, savedC) {
             console.log('saved',savedC);
           });
         }
