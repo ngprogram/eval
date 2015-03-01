@@ -33,8 +33,6 @@ function AuthFactory($http, $state) {
     function success(data, status) {
       user.email = email;
       console.log(data);
-      // user.username = ;
-      // uesr.businessName = ;
       $state.go('dashboard');
     }
 
@@ -63,16 +61,17 @@ function AuthFactory($http, $state) {
     };
 
     //post signup information to server
-    $http.post('/signup', payload)
+    return $http.post('/signup', payload)
       .success(success)
       .error(error);
 
     //callback for successful signup
-    function success() {
-      user.email = email;
+    function success(data) {
+      user.email = "";
       user.businessName = businessName;
       user.username = username;
-      $state.go('dashboard');
+      return data;
+      // $state.go('dashboard');
     }
 
     //callback for unsuccessful signup
@@ -93,7 +92,7 @@ function AuthFactory($http, $state) {
       delete user.email;
       delete user.username;
       delete user.businessName;
-      
+
       $state.go('login');
     }
   };
