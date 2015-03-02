@@ -15,9 +15,6 @@ mailController.verifyResetCode = verifyResetCode;
 mailController.resetPassword = resetPassword;
 
 function sendConfirmationEmail(req, res, next) {
-    console.log('sending');
-    console.log(req.body);
-
     var tempAccount = req.body;
     var email = tempAccount.email;
     var rand = Math.floor((Math.random() * 1000000000000))
@@ -35,6 +32,7 @@ function sendConfirmationEmail(req, res, next) {
                     console.log('error', err);
                     res.sendStatus(401);
                 } else {
+                    console.log('sending rand', rand);
                     res.send(200, rand);
                 }
             });

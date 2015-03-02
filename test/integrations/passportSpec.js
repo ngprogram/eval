@@ -13,7 +13,7 @@ app.use(routeHandler);
 
 describe('Local-Passport Specs', function() {
 
-  this.timeout(3000);
+  this.timeout(4000);
 
   describe('Signup Spec', function () {
     it('should signup a new user successfully', function(done) {
@@ -56,13 +56,13 @@ describe('Local-Passport Specs', function() {
   });
 
   describe('Login Spec', function() {
-    xit('should login into a current user successfully', function(done) {
+    it('should login into a current user successfully', function(done) {
       request(app)
         .post('/login')
         .send({ email: 'test@hotmail.com', password: 'hackreactor'})
         .expect(200)
         .end(function(err, res) {
-          expect(res.body).to.eql('test');
+          expect(res.body.email).to.eql('test@hotmail.com');
           done();
         })
     });
