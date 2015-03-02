@@ -18,23 +18,11 @@ app.post('/signup', mailController.sendConfirmationEmail, function(req, res) {
 var agent;
 describe('Mail Controller Spec Specs', function() {
 
-  before(function(done) {
-    TempUser.remove({}, function() {
-      console.log('local database cleared');
-      TempUser.find({}, function(err, found) {
-        console.log('local');
-        console.log('err', err);
-        console.log(found);
-        done();
-      });
-    });
-  });
-
   describe('Signup', function () {
     it('should send email', function(done) {
       request(app)
         .post('/signup')
-        .send({username: 'test', business_name: "Starbucks", email: 'azai91@gmail.com', password: 'hackreactor'})
+        .send({username: 'test', business_name: "Starbucks", email: 'kirby8u@gmail.com', password: 'hackreactor'})
         .expect(200, done);
     });
 
