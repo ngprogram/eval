@@ -4,6 +4,7 @@ angular
     'eval.employees',
     'eval.auth',
     'eval.navbar',
+    'eval.dates',
     'ui.router'
   ])
 .config(['$stateProvider', '$urlRouterProvider', '$httpProvider', function($stateProvider, $urlRouterProvider, $httpProvider) {
@@ -62,14 +63,12 @@ angular
 function checkLoggedIn($q, $timeout, $http, $location, $rootScope) {
 
   var deferred = $q.defer();
-  console.log('called');
   $http.get('/loggedin')
     .success(function(user) {
     if (user !== 0) {
       $rootScope.currentUser = user;
       $timeout(deferred.resolve, 0);
     } else {
-      console.log('not logged in ');
       $rootScope.currentUser = undefined;
       $location.path('/');
       $timeout(deferred.resolve, 0);
