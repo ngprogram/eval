@@ -14,9 +14,6 @@ function spellChecker(comment, callback) {
     if (err) {
       console.log('error with spellchecker', err);
     }
-    if (!JSON.parse(body).suggestion) {
-      console.log(JSON.parse(body));
-    }
     callback(JSON.parse(body).suggestion);
   })
 }

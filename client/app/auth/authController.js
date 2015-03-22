@@ -7,7 +7,7 @@ function AuthController($scope, $location, $http, $state, AuthFactory) {
 
   $scope.hasError = false;
   $scope.errorMessage = '';
-  //send the login information to the server if valid
+
   $scope.submitLogin = function(email, password) {
     if (email && password) {
       AuthFactory.login(email, password, function(errorMessage) {

@@ -45,7 +45,6 @@ function isLoggedIn(req, res, next) {
   if (req.isAuthenticated()) {
     return next();
   }
-  // angular redirects
   res.send(200, 0);
 };
 
