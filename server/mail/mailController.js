@@ -32,7 +32,6 @@ function sendConfirmationEmail(req, res, next) {
                     console.log('error', err);
                     res.sendStatus(401);
                 } else {
-                    console.log('sending rand', rand);
                     res.send(200, rand);
                 }
             });
@@ -113,7 +112,6 @@ function resetPassword(req, res, next) {
         if (!err) {
             User.findOne({email: foundTempUser.email}, function(err, foundUser) {
                 if (!err) {
-                    console.log('foundUser', foundUser);
                     foundUser.password = newPassword;
                     foundUser.save(function(err) {
                         req.body.username = foundUser.username;

@@ -12,7 +12,6 @@ var userSchema = Schema({
   companyId: {type: Number, unique: true}
 });
 
-// Password verification
 userSchema.methods.comparePassword = function(candidatePassword, cb) {
   bcrypt.compare(candidatePassword, this.password, function(err, isMatch) {
     if(err) {
@@ -31,12 +30,10 @@ userSchema.pre('save', function(next) {
   var salt = bcrypt.genSaltSync(SALT_WORK_FACTOR);
   user.password = bcrypt.hashSync(user.password, salt);
 
-  //TODO: improve counter
   mongoose.model('User', userSchema).find().count(function(err, count) {
     user.companyId = count;
     next();
   });
 });
 
-// Change when releasing/ clear DB before
 module.exports = mongoose.model('User', userSchema);

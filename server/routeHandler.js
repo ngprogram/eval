@@ -23,7 +23,6 @@ var MongoStore = require('connect-mongo')(session);
 
 routeHandler.use(cookieParser());
 routeHandler.use(bodyParser.json());
-// routeHandler.use(cors());
 
 var sessionStore = new MongoStore({mongooseConnection: mongoose.connection});
 var sessionOpts = {
@@ -50,7 +49,7 @@ routeHandler.use(express.static(__dirname + '/../client'));
 routeHandler.post('/login', passport.authenticate('local-login'), function(req, res) {
   res.send(200, req.user);
 });
-// userController.isLoggedIn,{}
+
 routeHandler.use('/comments', commentController.getComments);
 routeHandler.post('/signup', mailController.sendConfirmationEmail);
 routeHandler.get('/verify', mailController.verficationOfAccount, passport.authenticate('local-signup', {
